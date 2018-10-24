@@ -25,6 +25,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		
+		<mixednutz-api.version>2.0.0</mixednutz-api.version>
+		<spring-social.version>1.1.6.RELEASE</spring-social.version>
 	</properties>
 
 	<build>
@@ -32,17 +35,43 @@
 	
 	<dependencies>
 	
+		<dependency>
+			<groupId>net.mixednutz</groupId>
+			<artifactId>mixednutz-java-api</artifactId>
+			<version>${mixednutz-api.version}</version>
+		</dependency>
+	
 		<!-- Jackson Annotations for JSON serialization -->
 		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-annotations</artifactId>
+		    <groupId>com.fasterxml.jackson.datatype</groupId>
+		    <artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 		
+		<!-- Spring Web for REST client actions -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 		    <artifactId>spring-web</artifactId>
 		</dependency>
 		
+		<dependency>
+	        <groupId>org.springframework.social</groupId>
+	        <artifactId>spring-social-core</artifactId>
+	        <version>${spring-social.version}</version>
+	    </dependency>
+		
+		<!-- Commons Codec for the Base64 authorization -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Testing -->
+	  	<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 		
 	</dependencies>
 
