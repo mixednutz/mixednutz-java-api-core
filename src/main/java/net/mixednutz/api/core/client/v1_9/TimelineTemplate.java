@@ -106,8 +106,26 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 
 	@Override
 	public Page<TimelineElement, Instant> getPublicTimeline(PageRequest<Instant> pagination) {
-		// TODO Auto-generated method stub
-		return null;
+		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
+		Map<String, Object> uriVariables = new HashMap<>();
+		if (pagination!=null) {
+			datepagination = this.convertToDate(pagination);
+		}
+		HttpEntity<net.mixednutz.api.core.model.v1_9.Pagination<Date>> requestEntity = new HttpEntity<>(datepagination);
+				
+		String url = networkInfo.getPublicTimelineUrl();
+		HttpMethod method = HttpMethod.GET;
+		if (pagination!=null) {
+			url = networkInfo.getPublicTimelineNextPageUrl();
+			method = HttpMethod.POST;
+		}
+		
+		ResponseEntity<net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date>> responseEntity = restTemplate
+				.exchange(url, method, requestEntity,
+						new ParameterizedTypeReference<net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date>>() {
+						}, uriVariables);
+		
+		return this.convertPage(responseEntity.getBody());
 	}
 
 

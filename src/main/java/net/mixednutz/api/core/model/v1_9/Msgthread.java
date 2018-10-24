@@ -123,7 +123,7 @@ public class Msgthread extends InternalTimelineElement<Integer> {
 	@Override
 	public TimelineElement toTimelineElement() {
 		net.mixednutz.api.model.TimelineElement api = super.toTimelineElement();
-		api.setPostedByUser(this.author.toUserSmall());
+		api.setPostedByUser(this.author!=null?this.author.toUserSmall():null);
 		api.setTitle(this.subject);
 		return api;
 	}
