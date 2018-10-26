@@ -76,6 +76,7 @@ public class MixednutzTemplate extends AbstractOAuth2ApiBinding implements Mixed
 		}		
 		
 		timelineClient = new TimelineTemplate(networkInfo, getRestTemplate(), isAuthorized());
+		userClient = new UserTemplate(networkInfo, getRestTemplate(), isAuthorized());
 	}
 
 	public NetworkInfo getNetworkInfo() {
