@@ -31,9 +31,7 @@ public class UserTemplateTest {
 	
 	@Ignore
 	@Test
-	public void testGetTimeline() {
-		final String username = "andy";
-		
+	public void testGetMyTimeline() {
 		String baseUrl = "https://localhost:8443/mixednutz-web";
 		NetworkInfo networkInfo = new NetworkInfo();
 		networkInfo.setHostName("localhost");
@@ -52,7 +50,7 @@ public class UserTemplateTest {
 		MixednutzClient mixednutz = conn.getApi();
 		userTemplate = (UserTemplate) mixednutz.getUserClient();
 		
-		Page<TimelineElement, Instant> page = userTemplate.getTimeline(username);
+		Page<TimelineElement, Instant> page = userTemplate.getTimeline();
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
@@ -64,7 +62,7 @@ public class UserTemplateTest {
 		}
 		
 		//NEXT PAGE
-		page = userTemplate.getTimeline(username, page.getNextPage());
+		page = userTemplate.getTimeline(page.getNextPage());
 		
 		try {
 			System.out.println(mapper.writeValueAsString(page));

@@ -76,4 +76,14 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 		
 	}
 
+	@Override
+	public Page<TimelineElement, Instant> getTimeline() {
+		return getTimeline("me");
+	}
+
+	@Override
+	public Page<TimelineElement, Instant> getTimeline(PageRequest<Instant> pagination) {
+		return getTimeline("me", pagination);
+	}
+
 }
