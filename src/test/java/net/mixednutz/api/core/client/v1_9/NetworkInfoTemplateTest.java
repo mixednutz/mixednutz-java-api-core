@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import net.mixednutz.api.model.NetworkInfo;
+import net.mixednutz.api.model.INetworkInfo;
 
 public class NetworkInfoTemplateTest {
 	
@@ -20,7 +20,7 @@ public class NetworkInfoTemplateTest {
 		String baseUrl = "https://localhost:8443/mixednutz-web";
 		
 		networkInfoTemplate = new NetworkInfoTemplate(baseUrl, new RestTemplate());
-		NetworkInfo networkInfo = networkInfoTemplate.getNetworkInfo();
+		INetworkInfo networkInfo = networkInfoTemplate.getNetworkInfo();
 		assertNotNull(networkInfo);
 		
 		ObjectMapper mapper = new ObjectMapper();

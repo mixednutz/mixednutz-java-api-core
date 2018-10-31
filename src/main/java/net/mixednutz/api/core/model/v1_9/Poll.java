@@ -5,7 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import net.mixednutz.api.model.TimelineElement;
+import net.mixednutz.api.core.model.TimelineElement;
 
 @JsonInclude(Include.NON_NULL)
 public class Poll extends InternalTimelineElement<Integer> {
@@ -64,7 +64,7 @@ public class Poll extends InternalTimelineElement<Integer> {
 	
 	@Override
 	public TimelineElement toTimelineElement() {
-		net.mixednutz.api.model.TimelineElement api = super.toTimelineElement();
+		TimelineElement api = super.toTimelineElement();
 		api.setPostedByUser(this.author.toUserSmall());
 		api.setTitle(this.question);
 		return api;

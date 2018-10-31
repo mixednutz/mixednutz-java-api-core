@@ -4,7 +4,8 @@ import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 
 import net.mixednutz.api.client.MixednutzClient;
 import net.mixednutz.api.core.client.v1_9.MixednutzTemplate;
-import net.mixednutz.api.model.NetworkInfo;
+import net.mixednutz.api.core.model.NetworkInfo;
+import net.mixednutz.api.model.INetworkInfo;
 
 /**
  * Mixednutz implemented ServiceProvider
@@ -29,7 +30,7 @@ public class MixednutzServiceProvider extends AbstractOAuth2ServiceProvider<Mixe
 		return new MixednutzTemplate(networkInfo, accessToken);
 	}
 
-	public NetworkInfo getNetworkInfo() {
+	public INetworkInfo getNetworkInfo() {
 		return networkInfo;
 	}
 

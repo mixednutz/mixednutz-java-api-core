@@ -4,12 +4,12 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.mixednutz.api.model.Link;
+import net.mixednutz.api.model.ILink;
 
 public class Notification {
 
 	private String topic;
-	private Link iconUrl;
+	private ILink iconUrl;
 	private String message;
 	private String htmlMessage;
 	private String uri;
@@ -27,10 +27,10 @@ public class Notification {
 	public void setTopic(String topic) {
 		this.topic = topic;
 	}
-	public Link getIconUrl() {
+	public ILink getIconUrl() {
 		return iconUrl;
 	}
-	public void setIconUrl(Link icon) {
+	public void setIconUrl(ILink icon) {
 		this.iconUrl = icon;
 	}
 	public String getMessage() {

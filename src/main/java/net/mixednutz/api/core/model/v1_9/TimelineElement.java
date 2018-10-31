@@ -75,9 +75,9 @@ public class TimelineElement {
 		this.type = type;
 	}
 	
-	public net.mixednutz.api.model.TimelineElement toTimelineElement() {
-		net.mixednutz.api.model.TimelineElement api = new net.mixednutz.api.model.TimelineElement();
-		api.setType(new net.mixednutz.api.model.TimelineElement.Type(this.type, "mixednutz.net"));
+	public net.mixednutz.api.core.model.TimelineElement toTimelineElement() {
+		net.mixednutz.api.core.model.TimelineElement api = new net.mixednutz.api.core.model.TimelineElement();
+		api.setType(new net.mixednutz.api.core.model.TimelineElement.Type(this.type, "mixednutz.net"));
 		api.setPostedOnDate(this.timelineDate);
 		return api;
 	}

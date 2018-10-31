@@ -1,6 +1,6 @@
 package net.mixednutz.api.core.model.v1_9;
 
-import net.mixednutz.api.model.TimelineElement;
+import net.mixednutz.api.core.model.TimelineElement;
 
 public class SharedContent extends InternalTimelineElement<String> {
 	
@@ -29,7 +29,7 @@ public class SharedContent extends InternalTimelineElement<String> {
 	
 	@Override
 	public TimelineElement toTimelineElement() {
-		net.mixednutz.api.model.TimelineElement api = super.toTimelineElement();
+		TimelineElement api = super.toTimelineElement();
 		api.setPostedByUser(this.sharedBy.toUserSmall());
 		return api;
 	}

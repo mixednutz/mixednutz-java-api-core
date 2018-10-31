@@ -22,7 +22,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import net.mixednutz.api.client.MixednutzClient;
-import net.mixednutz.api.model.NetworkInfo;
+import net.mixednutz.api.core.model.NetworkInfo;
 
 public class GetMixedNutzAccessToken {
 	

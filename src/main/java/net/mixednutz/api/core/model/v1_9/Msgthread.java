@@ -3,7 +3,7 @@ package net.mixednutz.api.core.model.v1_9;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import net.mixednutz.api.model.TimelineElement;
+import net.mixednutz.api.core.model.TimelineElement;
 
 public class Msgthread extends InternalTimelineElement<Integer> {
 	
@@ -122,7 +122,7 @@ public class Msgthread extends InternalTimelineElement<Integer> {
 	}
 	@Override
 	public TimelineElement toTimelineElement() {
-		net.mixednutz.api.model.TimelineElement api = super.toTimelineElement();
+		TimelineElement api = super.toTimelineElement();
 		api.setPostedByUser(this.author!=null?this.author.toUserSmall():null);
 		api.setTitle(this.subject);
 		return api;

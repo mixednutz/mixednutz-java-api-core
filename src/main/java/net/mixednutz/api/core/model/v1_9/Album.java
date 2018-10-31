@@ -3,7 +3,7 @@ package net.mixednutz.api.core.model.v1_9;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import net.mixednutz.api.model.TimelineElement;
+import net.mixednutz.api.core.model.TimelineElement;
 
 public class Album extends InternalTimelineElement<Integer> {
 
@@ -119,7 +119,7 @@ public class Album extends InternalTimelineElement<Integer> {
 	
 	@Override
 	public TimelineElement toTimelineElement() {
-		net.mixednutz.api.model.TimelineElement api = super.toTimelineElement();
+		TimelineElement api = super.toTimelineElement();
 		api.setPostedByUser(this.author.toUserSmall());
 		api.setTitle(this.name);
 		api.setDescription(this.description);

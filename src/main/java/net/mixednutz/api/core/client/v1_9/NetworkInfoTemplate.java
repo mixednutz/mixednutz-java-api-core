@@ -2,10 +2,9 @@ package net.mixednutz.api.core.client.v1_9;
 
 import org.springframework.web.client.RestTemplate;
 
-import net.mixednutz.api.client.NetworkInfoClient;
-import net.mixednutz.api.model.NetworkInfo;
+import net.mixednutz.api.core.model.NetworkInfo;
 
-public class NetworkInfoTemplate implements NetworkInfoClient {
+public class NetworkInfoTemplate {
 
 	private final String baseUrl;
 	
@@ -17,7 +16,6 @@ public class NetworkInfoTemplate implements NetworkInfoClient {
 		this.restTemplate = restTemplate;
 	}
 
-	@Override
 	public NetworkInfo getNetworkInfo() {
 		String url = baseUrl + "/social-network-info";
 		

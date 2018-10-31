@@ -3,7 +3,7 @@ package org.springframework.social.mixednutz.v1_9.connect;
 import org.springframework.social.connect.support.OAuth2ConnectionFactory;
 
 import net.mixednutz.api.client.MixednutzClient;
-import net.mixednutz.api.model.NetworkInfo;
+import net.mixednutz.api.core.model.NetworkInfo;
 
 /**
  * MixedNutz ConnectionFactory implementation.

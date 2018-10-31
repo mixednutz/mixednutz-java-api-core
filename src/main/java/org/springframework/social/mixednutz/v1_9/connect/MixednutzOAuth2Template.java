@@ -12,7 +12,7 @@ import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 
-import net.mixednutz.api.model.NetworkInfo;
+import net.mixednutz.api.model.INetworkInfo;
 
 /**
  * MixedNutz-specific extension of OAuth2Template
@@ -21,7 +21,7 @@ import net.mixednutz.api.model.NetworkInfo;
  */
 public class MixednutzOAuth2Template extends OAuth2Template {
 
-	public MixednutzOAuth2Template(NetworkInfo networkInfo, String clientId, String clientSecret) {
+	public MixednutzOAuth2Template(INetworkInfo networkInfo, String clientId, String clientSecret) {
 		super(clientId, clientSecret, 
 				networkInfo.getOauth2AuthorizeUrl(), 
 				networkInfo.getOauth2TokenUrl());

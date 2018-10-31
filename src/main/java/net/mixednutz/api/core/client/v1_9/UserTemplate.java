@@ -15,11 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import net.mixednutz.api.client.UserClient;
-import net.mixednutz.api.model.NetworkInfo;
-import net.mixednutz.api.model.Page;
-import net.mixednutz.api.model.PageRequest;
-import net.mixednutz.api.model.TimelineElement;
-import net.mixednutz.api.model.UserSmall;
+import net.mixednutz.api.core.model.NetworkInfo;
+import net.mixednutz.api.core.model.Page;
+import net.mixednutz.api.core.model.TimelineElement;
+import net.mixednutz.api.model.IPageRequest;
+import net.mixednutz.api.model.IUserSmall;
 
 public class UserTemplate extends AbstractMixednutzOperations implements UserClient {
 
@@ -33,7 +33,7 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 	}
 
 	@Override
-	public UserSmall getUser(String username) {
+	public IUserSmall getUser(String username) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -44,7 +44,7 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 	}
 
 	@Override
-	public Page<TimelineElement, Instant> getTimeline(String username, PageRequest<Instant> pagination) {
+	public Page<TimelineElement, Instant> getTimeline(String username, IPageRequest<Instant> pagination) {
 		requireAuthorization();
 		
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
@@ -82,7 +82,7 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 	}
 
 	@Override
-	public Page<TimelineElement, Instant> getTimeline(PageRequest<Instant> pagination) {
+	public Page<TimelineElement, Instant> getTimeline(IPageRequest<Instant> pagination) {
 		return getTimeline("me", pagination);
 	}
 

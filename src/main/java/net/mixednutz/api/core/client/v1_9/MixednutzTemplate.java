@@ -5,17 +5,17 @@ import org.springframework.social.support.ClientHttpRequestFactorySelector;
 
 import net.mixednutz.api.client.GroupClient;
 import net.mixednutz.api.client.MixednutzClient;
-import net.mixednutz.api.client.NetworkInfoClient;
 import net.mixednutz.api.client.TimelineClient;
 import net.mixednutz.api.client.UserClient;
-import net.mixednutz.api.model.NetworkInfo;
+import net.mixednutz.api.core.model.NetworkInfo;
+import net.mixednutz.api.model.INetworkInfo;
 
 public class MixednutzTemplate extends AbstractOAuth2ApiBinding implements MixednutzClient {
 
 	private String baseUrl;
 	private NetworkInfo networkInfo;
 	private GroupClient groupClient;
-	private NetworkInfoClient networkInfoClient;
+	private NetworkInfoTemplate networkInfoClient;
 	private TimelineClient timelineClient;
 	private UserClient userClient;
 	
@@ -47,8 +47,7 @@ public class MixednutzTemplate extends AbstractOAuth2ApiBinding implements Mixed
 		return groupClient;
 	}
 
-	@Override
-	public NetworkInfoClient getNetworkInfoClient() {
+	public NetworkInfoTemplate getNetworkInfoClient() {
 		return networkInfoClient;
 	}
 
@@ -79,7 +78,7 @@ public class MixednutzTemplate extends AbstractOAuth2ApiBinding implements Mixed
 		userClient = new UserTemplate(networkInfo, getRestTemplate(), isAuthorized());
 	}
 
-	public NetworkInfo getNetworkInfo() {
+	public INetworkInfo getNetworkInfo() {
 		return networkInfo;
 	}
 

@@ -13,10 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import net.mixednutz.api.client.TimelineClient;
-import net.mixednutz.api.model.NetworkInfo;
-import net.mixednutz.api.model.Page;
-import net.mixednutz.api.model.PageRequest;
-import net.mixednutz.api.model.TimelineElement;
+import net.mixednutz.api.core.model.NetworkInfo;
+import net.mixednutz.api.core.model.Page;
+import net.mixednutz.api.core.model.TimelineElement;
+import net.mixednutz.api.model.IPageRequest;
 
 public class TimelineTemplate extends AbstractMixednutzOperations implements TimelineClient {
 	
@@ -35,7 +35,7 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 	}
 
 	@Override
-	public Page<TimelineElement, Instant> getTimeline(PageRequest<Instant> pagination) {
+	public Page<TimelineElement, Instant> getTimeline(IPageRequest<Instant> pagination) {
 		requireAuthorization();
 		
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
@@ -65,7 +65,7 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 	}
 
 	@Override
-	public Page<TimelineElement, Instant> getPublicTimeline(PageRequest<Instant> pagination) {
+	public Page<TimelineElement, Instant> getPublicTimeline(IPageRequest<Instant> pagination) {
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
 		if (pagination!=null) {
 			datepagination = convertToDate(pagination);

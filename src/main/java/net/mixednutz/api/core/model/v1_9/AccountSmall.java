@@ -1,7 +1,7 @@
 package net.mixednutz.api.core.model.v1_9;
 
-import net.mixednutz.api.model.Image;
-import net.mixednutz.api.model.Link;
+import net.mixednutz.api.core.model.Image;
+import net.mixednutz.api.core.model.Link;
 
 public class AccountSmall extends ApiObject<Integer> {
 	
@@ -47,8 +47,8 @@ public class AccountSmall extends ApiObject<Integer> {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public net.mixednutz.api.model.UserSmall toUserSmall() {
-		net.mixednutz.api.model.UserSmall api = new net.mixednutz.api.model.UserSmall();
+	public net.mixednutz.api.core.model.UserSmall toUserSmall() {
+		net.mixednutz.api.core.model.UserSmall api = new net.mixednutz.api.core.model.UserSmall();
 		api.setUsername(this.username);
 		api.setAvatar(new Image(this.imageUrl.getHref(),this.username+"'s avatar"));
 		api.setUri(this.uri);

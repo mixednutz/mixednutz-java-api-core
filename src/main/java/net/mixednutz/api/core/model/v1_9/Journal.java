@@ -2,8 +2,6 @@ package net.mixednutz.api.core.model.v1_9;
 
 import java.time.ZonedDateTime;
 
-import net.mixednutz.api.model.TimelineElement;
-
 public class Journal extends InternalTimelineElement<Integer> {
 
 	private String body;
@@ -116,8 +114,8 @@ public class Journal extends InternalTimelineElement<Integer> {
 	}
 	
 	@Override
-	public TimelineElement toTimelineElement() {
-		net.mixednutz.api.model.TimelineElement api = super.toTimelineElement();
+	public net.mixednutz.api.core.model.TimelineElement toTimelineElement() {
+		net.mixednutz.api.core.model.TimelineElement api = super.toTimelineElement();
 		api.setPostedByUser(this.author!=null?this.author.toUserSmall():null);
 		api.setTitle(this.subject);
 		api.setDescription(this.description);

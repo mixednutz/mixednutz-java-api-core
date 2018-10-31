@@ -4,9 +4,10 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
-import net.mixednutz.api.model.Page;
-import net.mixednutz.api.model.PageRequest;
-import net.mixednutz.api.model.TimelineElement;
+import net.mixednutz.api.core.model.Page;
+import net.mixednutz.api.core.model.PageRequest;
+import net.mixednutz.api.core.model.TimelineElement;
+import net.mixednutz.api.model.IPageRequest;
 
 class ConversionUtils {
 
@@ -34,7 +35,7 @@ class ConversionUtils {
 		return newPage;
 	}
 	
-	static net.mixednutz.api.core.model.v1_9.Pagination<Date> convertToDate(PageRequest<Instant> instantPagination) {
+	static net.mixednutz.api.core.model.v1_9.Pagination<Date> convertToDate(IPageRequest<Instant> instantPagination) {
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datePagination = new net.mixednutz.api.core.model.v1_9.Pagination<>();
 		datePagination.setSortDirection(instantPagination.getSortDirection());
 		datePagination.setAfter(instantPagination.getEnd()!=null?

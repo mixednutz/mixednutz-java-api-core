@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.mixednutz.api.model.AlternateLink;
-import net.mixednutz.api.model.ReactionCount;
-import net.mixednutz.api.model.TagCount;
+import net.mixednutz.api.core.model.AlternateLink;
+import net.mixednutz.api.core.model.ReactionCount;
+import net.mixednutz.api.core.model.TagCount;
 
 
 /**
@@ -122,8 +122,8 @@ public class InternalTimelineElement<ID extends Serializable> extends TimelineEl
 	}
 
 	@Override
-	public net.mixednutz.api.model.TimelineElement toTimelineElement() {
-		net.mixednutz.api.model.TimelineElement api = super.toTimelineElement();
+	public net.mixednutz.api.core.model.TimelineElement toTimelineElement() {
+		net.mixednutz.api.core.model.TimelineElement api = super.toTimelineElement();
 		api.setUri(this.uri);
 		api.setUrl(this.url);
 		api.setTags(this.tags!=null?new ArrayList<>(this.tags):null);

@@ -13,10 +13,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import net.mixednutz.api.client.MixednutzClient;
-import net.mixednutz.api.core.client.v1_9.TimelineTemplate;
-import net.mixednutz.api.model.NetworkInfo;
-import net.mixednutz.api.model.Page;
-import net.mixednutz.api.model.TimelineElement;
+import net.mixednutz.api.core.model.NetworkInfo;
+import net.mixednutz.api.core.model.Page;
+import net.mixednutz.api.core.model.TimelineElement;
 
 public class TimelineTemplateTest {
 	
