@@ -6,6 +6,7 @@ public class NetworkInfo implements INetworkInfo {
 
 	private String displayName;
 	private String hostName;
+	private String fontAwesomeIconName;
 	
 	private String oauth2AuthorizeUrl;
 	private String oauth2TokenUrl;
@@ -34,6 +35,12 @@ public class NetworkInfo implements INetworkInfo {
 	}
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
+	}
+	public String getFontAwesomeIconName() {
+		return fontAwesomeIconName;
+	}
+	public void setFontAwesomeIconName(String fontAwesomeIconName) {
+		this.fontAwesomeIconName = fontAwesomeIconName;
 	}
 	public String getOauth2AuthorizeUrl() {
 		return oauth2AuthorizeUrl;

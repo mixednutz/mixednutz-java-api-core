@@ -13,6 +13,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import net.mixednutz.api.client.UserClient;
 import net.mixednutz.api.core.model.NetworkInfo;
@@ -21,7 +22,7 @@ import net.mixednutz.api.core.model.TimelineElement;
 import net.mixednutz.api.model.IPageRequest;
 import net.mixednutz.api.model.IUserSmall;
 
-public class UserTemplate extends AbstractMixednutzOperations implements UserClient {
+public class UserTemplate extends AbstractMixednutzOperations implements UserClient<Instant> {
 
 	private final NetworkInfo networkInfo;
 	private final RestTemplate restTemplate;
@@ -57,17 +58,23 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 				
 		String url = networkInfo.getUserTimelineUrl();
 		HttpMethod method = HttpMethod.GET;
+		Integer pageSize = null;
 		if (pagination!=null) {
 			url = networkInfo.getUserTimelineNextPageUrl();
 			method = HttpMethod.POST;
+			pageSize = pagination.getPageSize();
+		}
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+		if (pageSize!=null) {
+			builder.queryParam("pageSize", pageSize);
 		}
 		
 		ResponseEntity<net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date>> responseEntity = restTemplate
-				.exchange(url, method, requestEntity,
+				.exchange(builder.toUriString(), method, requestEntity,
 						new ParameterizedTypeReference<net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date>>() {
 						}, uriVariables);
 		
-		return convertPage(responseEntity.getBody());
+		return convertPage(responseEntity.getBody(), pageSize);
 	}
 
 	@Override

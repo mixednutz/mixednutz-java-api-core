@@ -1,5 +1,7 @@
 package net.mixednutz.api.core.client.v1_9;
 
+import java.time.Instant;
+
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.support.ClientHttpRequestFactorySelector;
 
@@ -16,8 +18,8 @@ public class MixednutzTemplate extends AbstractOAuth2ApiBinding implements Mixed
 	private NetworkInfo networkInfo;
 	private GroupClient groupClient;
 	private NetworkInfoTemplate networkInfoClient;
-	private TimelineClient timelineClient;
-	private UserClient userClient;
+	private TimelineClient<Instant> timelineClient;
+	private UserClient<Instant> userClient;
 	
 	public MixednutzTemplate(NetworkInfo networkInfo) {
 		this.networkInfo = networkInfo;
@@ -52,12 +54,12 @@ public class MixednutzTemplate extends AbstractOAuth2ApiBinding implements Mixed
 	}
 
 	@Override
-	public TimelineClient getTimelineClient() {
+	public TimelineClient<Instant> getTimelineClient() {
 		return timelineClient;
 	}
 
 	@Override
-	public UserClient getUserClient() {
+	public UserClient<Instant> getUserClient() {
 		return userClient;
 	}
 	

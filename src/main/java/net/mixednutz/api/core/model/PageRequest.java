@@ -7,6 +7,7 @@ public class PageRequest<Token> implements IPageRequest<Token> {
 	
 	private Token end;
 	private Token start;
+	private Integer pageSize;
 	private SortDirection sortDirection = SortDirection.ASC;
 	
 	public Token getEnd() {
@@ -20,6 +21,12 @@ public class PageRequest<Token> implements IPageRequest<Token> {
 	}
 	public void setStart(Token before) {
 		this.start = before;
+	}
+	public Integer getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
 	public SortDirection getSortDirection() {
 		return sortDirection;

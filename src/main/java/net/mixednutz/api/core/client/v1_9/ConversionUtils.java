@@ -11,7 +11,8 @@ import net.mixednutz.api.model.IPageRequest;
 
 class ConversionUtils {
 
-	static Page<TimelineElement, Instant> convertPage(net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date> page) {
+	static Page<TimelineElement, Instant> convertPage(net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date> page,
+			Integer pageSize) {
 		ArrayList<TimelineElement> newItemList = new ArrayList<>();
 		for (net.mixednutz.api.core.model.v1_9.TimelineElement item: page.getItems()) {
 			newItemList.add(item.toTimelineElement());
@@ -19,16 +20,18 @@ class ConversionUtils {
 		Page<TimelineElement, Instant> newPage = new Page<TimelineElement, Instant>();
 		newPage.setItems(newItemList);
 		if (page.getCurrentPage()!=null) {
-			newPage.setPageRequest(convertToInstant(page.getCurrentPage(), 
+			newPage.setPageRequest(convertToInstant(page.getCurrentPage(), pageSize,
 					page.getCurrentPage().getBefore(), page.getCurrentPage().getAfter()));
 		}
 		if (page.getNextPage()!=null) {
 			if (page.getNextPage().getAfter()!=null) {
-				newPage.setPrevPage(convertToInstant(page.getNextPage(), null, page.getNextPage().getAfter()));
+				newPage.setPrevPage(convertToInstant(page.getNextPage(), pageSize, 
+						null, page.getNextPage().getAfter()));
 				newPage.setHasPrev(true);
 			}
 			if (page.getNextPage().getBefore()!=null) {
-				newPage.setNextPage(convertToInstant(page.getNextPage(), page.getNextPage().getBefore(), null));
+				newPage.setNextPage(convertToInstant(page.getNextPage(), pageSize, 
+						page.getNextPage().getBefore(), null));
 				newPage.setHasNext(true);
 			}
 		}
@@ -44,9 +47,11 @@ class ConversionUtils {
 				new Date(instantPagination.getStart().toEpochMilli()):null);
 		return datePagination;
 	}
-	static PageRequest<Instant> convertToInstant(net.mixednutz.api.core.model.v1_9.Pagination<Date> datePagination, Date before, Date after) {
+	static PageRequest<Instant> convertToInstant(net.mixednutz.api.core.model.v1_9.Pagination<Date> datePagination, Integer pageSize, 
+			Date before, Date after) {
 		PageRequest<Instant> instantPagination = new PageRequest<>();
 		instantPagination.setSortDirection(datePagination.getSortDirection());
+		instantPagination.setPageSize(pageSize);
 		if (after!=null) {
 			instantPagination.setEnd(after.toInstant());
 		}
