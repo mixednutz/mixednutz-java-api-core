@@ -90,4 +90,8 @@ public class NetworkInfo implements INetworkInfo {
 	public void setUserTimelineNextPageUrl(String userTimelineNextPageUrl) {
 		this.userTimelineNextPageUrl = userTimelineNextPageUrl;
 	}
+	@Override
+	public String[] compatibleMimeTypes() {
+		return new String[]{};
+	}
 }

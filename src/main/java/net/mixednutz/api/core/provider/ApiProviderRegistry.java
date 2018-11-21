@@ -25,4 +25,8 @@ public class ApiProviderRegistry {
 		return (ApiProvider<Api, ?>) socialNetworkClients.get(providerId);
 	}
 	
+	public Iterable<ApiProvider<?,?>> getProviders() {
+		return socialNetworkClients.values();
+	}
+	
 }
