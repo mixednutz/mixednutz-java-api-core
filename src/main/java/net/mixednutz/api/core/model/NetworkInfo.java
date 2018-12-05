@@ -4,6 +4,7 @@ import net.mixednutz.api.model.INetworkInfo;
 
 public class NetworkInfo implements INetworkInfo {
 
+	private String id;
 	private String displayName;
 	private String hostName;
 	private String fontAwesomeIconName;
@@ -23,6 +24,12 @@ public class NetworkInfo implements INetworkInfo {
 	public NetworkInfo(String hostName) {
 		super();
 		this.hostName = hostName;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getDisplayName() {
 		return displayName;
