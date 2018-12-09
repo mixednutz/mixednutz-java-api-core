@@ -40,6 +40,12 @@
 			<artifactId>mixednutz-java-api</artifactId>
 			<version>${mixednutz-api.version}</version>
 		</dependency>
+		
+		<!--  Spring -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 	
 		<!-- Jackson Annotations for JSON serialization -->
 		<dependency>

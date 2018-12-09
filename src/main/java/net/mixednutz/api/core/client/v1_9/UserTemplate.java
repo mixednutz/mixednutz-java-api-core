@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -19,6 +20,7 @@ import net.mixednutz.api.client.UserClient;
 import net.mixednutz.api.core.model.NetworkInfo;
 import net.mixednutz.api.core.model.Page;
 import net.mixednutz.api.core.model.TimelineElement;
+import net.mixednutz.api.core.model.v1_9.UserSmall;
 import net.mixednutz.api.model.IPageRequest;
 import net.mixednutz.api.model.IUserSmall;
 
@@ -31,6 +33,20 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 		super(isAuthorized);
 		this.restTemplate = restTemplate;
 		this.networkInfo = networkInfo;
+	}
+
+	@Override
+	public IUserSmall getUser() {
+		requireAuthorization();
+		
+		HttpEntity<String> requestEntity = new HttpEntity<>(new HttpHeaders());
+		String url = networkInfo.getUserProfileUrl();
+		HttpMethod method = HttpMethod.GET;
+		
+		UserSmall response = restTemplate
+			.exchange(url, method, requestEntity, UserSmall.class).getBody();
+
+		return response.toUserSmall();
 	}
 
 	@Override

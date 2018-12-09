@@ -17,6 +17,7 @@ public class NetworkInfo implements INetworkInfo {
 	private String publicTimelineNextPageUrl;
 	private String userTimelineUrl;
 	private String userTimelineNextPageUrl;
+	private String userProfileUrl;
 	
 	public NetworkInfo() {
 		super();
@@ -96,6 +97,12 @@ public class NetworkInfo implements INetworkInfo {
 	}
 	public void setUserTimelineNextPageUrl(String userTimelineNextPageUrl) {
 		this.userTimelineNextPageUrl = userTimelineNextPageUrl;
+	}
+	public String getUserProfileUrl() {
+		return userProfileUrl;
+	}
+	public void setUserProfileUrl(String userProfileUrl) {
+		this.userProfileUrl = userProfileUrl;
 	}
 	@Override
 	public String[] compatibleMimeTypes() {

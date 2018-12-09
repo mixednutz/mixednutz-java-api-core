@@ -18,6 +18,7 @@ import net.mixednutz.api.core.model.NetworkInfo;
 import net.mixednutz.api.core.model.Page;
 import net.mixednutz.api.core.model.TimelineElement;
 
+
 public class UserTemplateTest {
 	
 	private static final String CLIENT_ID = "mixednutzjavaapi";
@@ -25,9 +26,30 @@ public class UserTemplateTest {
 	private static final String SCOPE = "timeline";
 	private static final String ACCESS_TOKEN = "854ca18e-ff14-46d1-b1f2-e3bb2c3582c9";
 	private static final String REFRESH_TOKEN = "3ff63145-d9d3-4294-b566-35ac8f25e8d5";
-	private static final long EXPIRES_IN = 1570740494421L;
+	private static final long EXPIRES_IN = 1570740494868L;
 	
 	private UserTemplate userTemplate;
+	
+	@Ignore
+	@Test
+	public void testGetCurrentUser() {
+		String baseUrl = "https://localhost:8443/mixednutz-web";
+		NetworkInfo networkInfo = new NetworkInfo();
+		networkInfo.setHostName("localhost");
+		networkInfo.setOauth2AuthorizeUrl(baseUrl+"/oauth/authorize");
+		networkInfo.setOauth2TokenUrl(baseUrl+"/oauth/token");
+		networkInfo.setUserProfileUrl(baseUrl+"/api/loggedin/user");
+		
+		MixednutzConnectionFactory connectionFactory= new MixednutzConnectionFactory(
+				networkInfo, CLIENT_ID, CLIENT_SECRET);
+		
+		AccessGrant accessGrant = new AccessGrant(
+				ACCESS_TOKEN, SCOPE, REFRESH_TOKEN, EXPIRES_IN);
+		Connection<MixednutzClient> conn = connectionFactory.createConnection(accessGrant);
+		
+		System.out.println(conn.getImageUrl());
+		System.out.println(conn.getDisplayName());
+	}
 	
 	@Ignore
 	@Test

@@ -50,6 +50,7 @@ public class AccountSmall extends ApiObject<Integer> {
 	public net.mixednutz.api.core.model.UserSmall toUserSmall() {
 		net.mixednutz.api.core.model.UserSmall api = new net.mixednutz.api.core.model.UserSmall();
 		api.setUsername(this.username);
+		api.setDisplayName(this.username);
 		api.setAvatar(new Image(this.imageUrl.getHref(),this.username+"'s avatar"));
 		api.setUri(this.uri);
 		api.setUrl(this.url);

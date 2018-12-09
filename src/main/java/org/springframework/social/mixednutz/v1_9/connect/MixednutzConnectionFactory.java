@@ -4,6 +4,7 @@ import org.springframework.social.connect.support.OAuth2ConnectionFactory;
 
 import net.mixednutz.api.client.MixednutzClient;
 import net.mixednutz.api.core.model.NetworkInfo;
+import net.mixednutz.api.model.INetworkInfo;
 
 /**
  * MixedNutz ConnectionFactory implementation.
@@ -12,8 +13,6 @@ import net.mixednutz.api.core.model.NetworkInfo;
  */
 public class MixednutzConnectionFactory extends OAuth2ConnectionFactory<MixednutzClient>{
 
-public static final String PROVIDER_ID = "mixednutz";
-	
 	/**
 	 * Creates a MixednutzConnectionFactory
 	 * 
@@ -42,7 +41,9 @@ public static final String PROVIDER_ID = "mixednutz";
 		super(serviceProvider.getNetworkInfo().getHostName(),
 				serviceProvider, new MixednutzAdapter());
 	}
-	
-	
+
+	public INetworkInfo getNetworkInfo() {
+		return ((MixednutzServiceProvider) super.getServiceProvider()).getNetworkInfo();
+	}
 	
 }

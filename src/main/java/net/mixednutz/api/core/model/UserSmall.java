@@ -13,6 +13,7 @@ public class UserSmall extends ApiResource implements IUserSmall {
 	private String username;
 	private String displayName;
 	private Image avatar;
+	private String id;
 	
 	public String getUsername() {
 		return username;
@@ -31,6 +32,12 @@ public class UserSmall extends ApiResource implements IUserSmall {
 	}
 	public void setAvatar(Image avatar) {
 		this.avatar = avatar;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}	
 	
 }

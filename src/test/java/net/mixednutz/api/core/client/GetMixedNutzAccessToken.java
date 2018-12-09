@@ -33,7 +33,9 @@ public class GetMixedNutzAccessToken {
 	
 	public static final String REDIRECT_URI = "http://localhost";
 	
-	static String baseUrl = "https://mixednutz.net";
+//	static String baseUrl = "https://mixednutz.net";
+	static String baseUrl = "https://localhost:8443/mixednutz-web";
+	
 	static MixednutzConnectionFactory connectionFactory;
 	static NetworkInfo networkInfo;
 	static {
