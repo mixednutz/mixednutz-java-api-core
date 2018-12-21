@@ -124,6 +124,7 @@ public class InternalTimelineElement<ID extends Serializable> extends TimelineEl
 	@Override
 	public net.mixednutz.api.core.model.TimelineElement toTimelineElement() {
 		net.mixednutz.api.core.model.TimelineElement api = super.toTimelineElement();
+		api.setProviderId(this.id);
 		api.setUri(this.uri);
 		api.setUrl(this.url);
 		api.setTags(this.tags!=null?new ArrayList<>(this.tags):null);

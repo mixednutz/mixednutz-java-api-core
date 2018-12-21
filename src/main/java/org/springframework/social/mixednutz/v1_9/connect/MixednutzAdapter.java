@@ -23,7 +23,8 @@ public class MixednutzAdapter implements ApiAdapter<MixednutzClient> {
 	@Override
 	public void setConnectionValues(MixednutzClient api, ConnectionValues values) {
 		IUserSmall user = api.getUserClient().getUser();
-		values.setProviderUserId(user.getId());
+		values.setProviderUserId(user.getProviderId()!=null?
+				user.getProviderId().toString():null);
 		values.setImageUrl(user.getAvatar().getSrc());
 		values.setDisplayName(user.getDisplayName());
 	}
@@ -32,7 +33,8 @@ public class MixednutzAdapter implements ApiAdapter<MixednutzClient> {
 	public UserProfile fetchUserProfile(MixednutzClient api) {
 		IUserSmall user = api.getUserClient().getUser();
 		return new UserProfileBuilder()
-			.setId(user.getId())
+			.setId(user.getProviderId()!=null?
+					user.getProviderId().toString():null)
 			.setUsername(user.getUsername()).build();
 	}
 

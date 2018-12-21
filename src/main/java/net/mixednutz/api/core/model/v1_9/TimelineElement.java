@@ -79,6 +79,7 @@ public class TimelineElement {
 		net.mixednutz.api.core.model.TimelineElement api = new net.mixednutz.api.core.model.TimelineElement();
 		api.setType(new net.mixednutz.api.core.model.TimelineElement.Type(this.type, "mixednutz.net"));
 		api.setPostedOnDate(this.timelineDate);
+		api.setPaginationId(this.timelineId);
 		return api;
 	}
 		
