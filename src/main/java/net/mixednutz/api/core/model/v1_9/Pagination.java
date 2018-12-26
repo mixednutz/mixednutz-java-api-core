@@ -83,7 +83,7 @@ public class Pagination<Token> {
 			return sortDirection.toString()+" After:"+after.toString();
 		}
 		if (before!=null) {
-			return sortDirection.toString()+" Before:"+after.toString();
+			return sortDirection.toString()+" Before:"+before.toString();
 		}
 		return super.toString();
 	}

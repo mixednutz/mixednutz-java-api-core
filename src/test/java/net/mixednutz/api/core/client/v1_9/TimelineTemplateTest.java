@@ -24,7 +24,7 @@ public class TimelineTemplateTest {
 	private static final String SCOPE = "timeline";
 	private static final String ACCESS_TOKEN = "854ca18e-ff14-46d1-b1f2-e3bb2c3582c9";
 	private static final String REFRESH_TOKEN = "3ff63145-d9d3-4294-b566-35ac8f25e8d5";
-	private static final long EXPIRES_IN = 1570740494421L;
+	private static final long EXPIRES_IN = 1570740494868L;
 	
 	private TimelineTemplate timelineTemplate;
 	
@@ -38,6 +38,7 @@ public class TimelineTemplateTest {
 		networkInfo.setOauth2TokenUrl(baseUrl+"/oauth/token");
 		networkInfo.setTimelineUrl(baseUrl+"/api/nutsterz/timeline");
 		networkInfo.setTimelineNextPageUrl(baseUrl+"/api/nutsterz/timeline/nextpage");
+		networkInfo.setUserProfileUrl(baseUrl+"/api/loggedin/user");
 		
 		MixednutzConnectionFactory connectionFactory= new MixednutzConnectionFactory(
 				networkInfo, CLIENT_ID, CLIENT_SECRET);
@@ -113,6 +114,7 @@ public class TimelineTemplateTest {
 		networkInfo.setOauth2TokenUrl(baseUrl+"/oauth/token");
 		networkInfo.setPublicTimelineUrl(baseUrl+"/api/lounge/timeline");
 		networkInfo.setPublicTimelineNextPageUrl(baseUrl+"/api/lounge/timeline/nextpage");
+		networkInfo.setUserProfileUrl(baseUrl+"/api/loggedin/user");
 		
 		MixednutzConnectionFactory connectionFactory= new MixednutzConnectionFactory(
 				networkInfo, CLIENT_ID, CLIENT_SECRET);

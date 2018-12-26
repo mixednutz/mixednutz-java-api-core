@@ -6,6 +6,15 @@ public class Link implements ILink {
 	
 	private String href;
 
+	public Link() {
+		super();
+	}
+
+	public Link(String href) {
+		super();
+		this.href = href;
+	}
+
 	public String getHref() {
 		return href;
 	}

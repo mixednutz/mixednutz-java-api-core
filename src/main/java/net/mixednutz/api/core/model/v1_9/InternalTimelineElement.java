@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.mixednutz.api.core.model.Action;
 import net.mixednutz.api.core.model.AlternateLink;
+import net.mixednutz.api.core.model.Link;
 import net.mixednutz.api.core.model.ReactionCount;
 import net.mixednutz.api.core.model.TagCount;
 
@@ -127,12 +129,52 @@ public class InternalTimelineElement<ID extends Serializable> extends TimelineEl
 		api.setProviderId(this.id);
 		api.setUri(this.uri);
 		api.setUrl(this.url);
-		api.setTags(this.tags!=null?new ArrayList<>(this.tags):null);
-		api.setReactions(this.reactions!=null?new ArrayList<>(this.reactions):null);
+		//Counts
+		if (tags!=null) {
+			for (TagCount tag: this.tags) {
+				TagCount newtag = new TagCount();
+				newtag.setName(tag.getName());
+				newtag.setDisplayName(tag.getDisplayName());
+				newtag.setCount(tag.getCount());
+				newtag.setToggleAction(new Action(
+						new Link(url+"/tag/toggle"), 
+						"tag_"+tag.getName(), 
+						tag.getName()));
+			}
+		}
+		if (reactions!=null) {
+			for (ReactionCount reaction: this.reactions) {
+				ReactionCount newreaction = new ReactionCount();
+				newreaction.setUnicode(reaction.getUnicode());
+				newreaction.setDescription(reaction.getDescription());
+				newreaction.setCount(reaction.getCount());
+				newreaction.setToggleAction(new Action(
+						new Link(url+"/reaction/toggle"),
+						"emoji_"+reaction.getId(),
+						reaction.getUnicode(), 
+						reaction.getDescription()));
+			}
+		}
+		api.setReshares(new ArrayList<>());
+		//Links
 		AlternateLink oembed = new AlternateLink();
 		oembed.setHref(this.oEmbedUrl);
 		oembed.setType("application/json+oembed");
 		api.setAlternateLinks(Collections.singletonList(oembed));
+		//Actions
+		api.setActions(new ArrayList<>());
+		{
+			Action tagAction = new Action(
+					new Link(url+"/tag"), "tag", "New Tag");
+			tagAction.setGlyphiconIconName("tag");
+			api.getActions().add(tagAction);
+		}
+		{
+			Action reactAction = new Action(
+					new Link(url+"/reaction"), "reaction", "New Reaction");
+			reactAction.setFontAwesomeIconName("smile-o");
+			api.getActions().add(reactAction);
+		}
 		return api;
 	}
 
