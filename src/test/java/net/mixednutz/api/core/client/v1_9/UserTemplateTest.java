@@ -72,7 +72,7 @@ public class UserTemplateTest {
 		MixednutzClient mixednutz = conn.getApi();
 		userTemplate = (UserTemplate) mixednutz.getUserClient();
 		
-		Page<TimelineElement, Instant> page = userTemplate.getTimeline();
+		Page<TimelineElement, Instant> page = userTemplate.getUserTimeline();
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
@@ -84,7 +84,7 @@ public class UserTemplateTest {
 		}
 		
 		//NEXT PAGE
-		page = userTemplate.getTimeline(page.getNextPage());
+		page = userTemplate.getUserTimeline(page.getNextPage());
 		
 		try {
 			System.out.println(mapper.writeValueAsString(page));
@@ -118,7 +118,7 @@ public class UserTemplateTest {
 		MixednutzClient mixednutz = conn.getApi();
 		userTemplate = (UserTemplate) mixednutz.getUserClient();
 		
-		Page<TimelineElement, Instant> page = userTemplate.getTimeline(username);
+		Page<TimelineElement, Instant> page = userTemplate.getUserTimeline(username);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
@@ -132,7 +132,7 @@ public class UserTemplateTest {
 		//NEXT PAGE
 		if (page.hasNext()) {
 			try {
-				page = userTemplate.getTimeline(username, page.getNextPage());
+				page = userTemplate.getUserTimeline(username, page.getNextPage());
 				} catch(HttpClientErrorException ex) {
 					System.out.println(ex.getResponseBodyAsString());
 					throw ex;

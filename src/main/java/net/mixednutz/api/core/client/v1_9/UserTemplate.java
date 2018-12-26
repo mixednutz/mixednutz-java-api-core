@@ -56,12 +56,12 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 	}
 
 	@Override
-	public Page<TimelineElement, Instant> getTimeline(String username) {
-		return getTimeline(username, null);
+	public Page<TimelineElement, Instant> getUserTimeline(String username) {
+		return getUserTimeline(username, null);
 	}
 
 	@Override
-	public Page<TimelineElement, Instant> getTimeline(String username, IPageRequest<Instant> pagination) {
+	public Page<TimelineElement, Instant> getUserTimeline(String username, IPageRequest<Instant> pagination) {
 		requireAuthorization();
 		
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
@@ -100,13 +100,13 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 	}
 
 	@Override
-	public Page<TimelineElement, Instant> getTimeline() {
-		return getTimeline("me");
+	public Page<TimelineElement, Instant> getUserTimeline() {
+		return getUserTimeline("me");
 	}
 
 	@Override
-	public Page<TimelineElement, Instant> getTimeline(IPageRequest<Instant> pagination) {
-		return getTimeline("me", pagination);
+	public Page<TimelineElement, Instant> getUserTimeline(IPageRequest<Instant> pagination) {
+		return getUserTimeline("me", pagination);
 	}
 
 }
