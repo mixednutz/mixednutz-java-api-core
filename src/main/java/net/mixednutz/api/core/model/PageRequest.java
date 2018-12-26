@@ -72,7 +72,7 @@ public class PageRequest<Token> implements IPageRequest<Token> {
 			return "After:"+end.toString();
 		}
 		if (start!=null) {
-			return "Before:"+end.toString();
+			return "Before:"+start.toString();
 		}
 		return super.toString();
 	}
