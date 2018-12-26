@@ -14,6 +14,7 @@ public class UserSmall extends ApiResource implements IUserSmall {
 	private String displayName;
 	private Image avatar;
 	private String id;
+	private boolean _private;
 	
 	public String getUsername() {
 		return username;
@@ -38,6 +39,13 @@ public class UserSmall extends ApiResource implements IUserSmall {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	@Override
+	public boolean isPrivate() {
+		return _private;
+	}
+	public void setPrivate(boolean _private) {
+		this._private = _private;
 	}	
 	
 }

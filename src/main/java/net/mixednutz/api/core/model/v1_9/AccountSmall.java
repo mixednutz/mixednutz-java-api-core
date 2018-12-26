@@ -55,6 +55,7 @@ public class AccountSmall extends ApiObject<Integer> {
 		api.setAvatar(new Image(this.imageUrl.getHref(),this.username+"'s avatar"));
 		api.setUri(this.uri);
 		api.setUrl(this.url);
+		api.setPrivate(false); //this feature doesn't exist yet
 		return api;
 	}
 	
