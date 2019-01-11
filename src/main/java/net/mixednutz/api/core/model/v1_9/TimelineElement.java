@@ -1,6 +1,5 @@
 package net.mixednutz.api.core.model.v1_9;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -40,7 +39,7 @@ public class TimelineElement {
 	/**
 	 * This is for timelines that use IDs for pagination
 	 */
-	private Serializable timelineId;
+	private String timelineId;
 
 	public TimelineElement(String type) {
 		super();
@@ -59,11 +58,11 @@ public class TimelineElement {
 		this.timelineDate = timelineDate;
 	}
 
-	public Serializable getTimelineId() {
+	public String getTimelineId() {
 		return timelineId;
 	}
 
-	public void setTimelineId(Serializable timelineId) {
+	public void setTimelineId(String timelineId) {
 		this.timelineId = timelineId;
 	}
 

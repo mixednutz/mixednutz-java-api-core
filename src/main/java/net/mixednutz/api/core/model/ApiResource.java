@@ -1,6 +1,5 @@
 package net.mixednutz.api.core.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import net.mixednutz.api.model.IApiResource;
@@ -10,7 +9,7 @@ public class ApiResource implements IApiResource {
 	/**
 	 * ID native to the underlying API.
 	 */
-	private Serializable providerId;
+	private String providerId;
 	
 	/**
 	 * Resource Identifier of element.  
@@ -29,10 +28,10 @@ public class ApiResource implements IApiResource {
 	private List<Action> actions;
 	
 	
-	public Serializable getProviderId() {
+	public String getProviderId() {
 		return providerId;
 	}
-	public void setProviderId(Serializable providerId) {
+	public void setProviderId(String providerId) {
 		this.providerId = providerId;
 	}
 	public String getUrl() {

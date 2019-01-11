@@ -1,6 +1,5 @@
 package net.mixednutz.api.core.model;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -43,7 +42,7 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 	/**
 	 * Unique value to relative to the timeline page.
 	 */
-	private Serializable paginationId;
+	private String paginationId;
 	
 	/**
 	 * Optional Title
@@ -115,11 +114,11 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 		this.updatedOnDate = updatedOnDate;
 	}
 
-	public Serializable getPaginationId() {
+	public String getPaginationId() {
 		return paginationId;
 	}
 
-	public void setPaginationId(Serializable paginationId) {
+	public void setPaginationId(String paginationId) {
 		this.paginationId = paginationId;
 	}
 
