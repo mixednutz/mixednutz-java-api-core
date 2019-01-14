@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import net.mixednutz.api.model.IAction;
-import net.mixednutz.api.model.ILink;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -14,7 +13,7 @@ public class Action implements IAction {
 	private String name; 
 	private String displayName; 
 	private String description; 
-	private ILink url;
+	private Link url;
 	private String fontAwesomeIconName;
 	private String glyphiconIconName;
 	
@@ -22,10 +21,10 @@ public class Action implements IAction {
 	public Action() {
 		super();
 	}
-	public Action(ILink url, String name, String displayName) {
+	public Action(Link url, String name, String displayName) {
 		this(url, name, displayName, null);
 	}
-	public Action(ILink url, String name, String displayName, String description) {
+	public Action(Link url, String name, String displayName, String description) {
 		super();
 		this.url = url;
 		this.name = name;
@@ -50,10 +49,10 @@ public class Action implements IAction {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public ILink getUrl() {
+	public Link getUrl() {
 		return url;
 	}
-	public void setUrl(ILink url) {
+	public void setUrl(Link url) {
 		this.url = url;
 	}
 	public String getFontAwesomeIconName() {

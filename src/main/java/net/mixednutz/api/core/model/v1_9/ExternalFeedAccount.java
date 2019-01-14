@@ -1,12 +1,12 @@
 package net.mixednutz.api.core.model.v1_9;
 
-import net.mixednutz.api.model.ILink;
+import net.mixednutz.api.core.model.Link;
 
 public class ExternalFeedAccount {
 
 	private String name;
 	private Integer id;
-	private ILink image;
+	private Link image;
 	private String nativeUsername;
 	
 	public String getName() {
@@ -21,10 +21,10 @@ public class ExternalFeedAccount {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public ILink getImage() {
+	public Link getImage() {
 		return image;
 	}
-	public void setImage(ILink image) {
+	public void setImage(Link image) {
 		this.image = image;
 	}
 	public String getNativeUsername() {
