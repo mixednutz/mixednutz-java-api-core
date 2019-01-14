@@ -1,7 +1,8 @@
 package net.mixednutz.api.core.client.v1_9;
 
 import static net.mixednutz.api.core.client.v1_9.ConversionUtils.convertPage;
-import static net.mixednutz.api.core.client.v1_9.ConversionUtils.convertToDate;
+import static net.mixednutz.api.core.client.v1_9.ConversionUtils.convertToV1_9;
+import static net.mixednutz.api.core.client.v1_9.ConversionUtils.parseStringPaginationToken;
 
 import java.time.Instant;
 import java.util.Date;
@@ -21,7 +22,9 @@ import net.mixednutz.api.core.model.NetworkInfo;
 import net.mixednutz.api.core.model.Page;
 import net.mixednutz.api.core.model.TimelineElement;
 import net.mixednutz.api.core.model.v1_9.UserSmall;
+import net.mixednutz.api.model.IPage;
 import net.mixednutz.api.model.IPageRequest;
+import net.mixednutz.api.model.ITimelineElement;
 import net.mixednutz.api.model.IUserSmall;
 
 public class UserTemplate extends AbstractMixednutzOperations implements UserClient<Instant> {
@@ -59,6 +62,12 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 	public Page<TimelineElement, Instant> getUserTimeline(String username) {
 		return getUserTimeline(username, null);
 	}
+	
+	@Override
+	public IPage<? extends ITimelineElement, Instant> getUserTimelineStringToken(String username,
+			IPageRequest<String> pagination) {
+		return getUserTimeline(username, parseStringPaginationToken(pagination));
+	}
 
 	@Override
 	public Page<TimelineElement, Instant> getUserTimeline(String username, IPageRequest<Instant> pagination) {
@@ -68,7 +77,7 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 		Map<String, Object> uriVariables = new HashMap<>();
 		uriVariables.put("username", username);
 		if (pagination!=null) {
-			datepagination = convertToDate(pagination);
+			datepagination = convertToV1_9(pagination);
 		}
 		HttpEntity<net.mixednutz.api.core.model.v1_9.Pagination<Date>> requestEntity = new HttpEntity<>(datepagination);
 				
@@ -102,6 +111,11 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 	@Override
 	public Page<TimelineElement, Instant> getUserTimeline() {
 		return getUserTimeline("me");
+	}
+	
+	@Override
+	public IPage<? extends ITimelineElement, Instant> getUserTimelineStringToken(IPageRequest<String> pagination) {
+		return getUserTimelineStringToken("me", pagination);
 	}
 
 	@Override

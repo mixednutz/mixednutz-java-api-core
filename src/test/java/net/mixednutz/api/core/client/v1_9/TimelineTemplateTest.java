@@ -10,6 +10,7 @@ import org.springframework.social.oauth2.AccessGrant;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import net.mixednutz.api.client.MixednutzClient;
@@ -54,6 +55,7 @@ public class TimelineTemplateTest {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
+		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 		try {
 			System.out.println(mapper.writeValueAsString(page));
 		} catch (JsonProcessingException e) {
@@ -62,7 +64,19 @@ public class TimelineTemplateTest {
 		}
 		
 		//NEXT PAGE
+		System.out.println(page.getNextPage());
 		page = timelineTemplate.getTimeline(page.getNextPage());
+		
+		try {
+			System.out.println(mapper.writeValueAsString(page));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//PREV PAGE
+		System.out.println(page.getPrevPage());
+		page = timelineTemplate.getTimeline(page.getPrevPage());
 		
 		try {
 			System.out.println(mapper.writeValueAsString(page));
@@ -77,7 +91,7 @@ public class TimelineTemplateTest {
 	@Test
 	public void testGetTimeline2() {
 		/**
-		 * this time derive network info from the naseurl
+		 * this time derive network info from the baseurl
 		 */
 		String baseUrl = "https://localhost:8443/mixednutz-web";
 				

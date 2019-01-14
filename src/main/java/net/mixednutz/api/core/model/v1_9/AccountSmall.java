@@ -52,7 +52,7 @@ public class AccountSmall extends ApiObject<Integer> {
 		api.setProviderId(this.getId().toString());
 		api.setUsername(this.username);
 		api.setAvatar(new Image(this.imageUrl.getHref(),this.username+"'s avatar"));
-		api.setUri(this.uri);
+		api.setUri("/api/user"+this.uri);
 		api.setUrl(this.url);
 		api.setPrivate(false); //this feature doesn't exist yet
 		return api;

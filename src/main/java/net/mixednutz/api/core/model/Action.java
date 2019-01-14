@@ -18,6 +18,10 @@ public class Action implements IAction {
 	private String fontAwesomeIconName;
 	private String glyphiconIconName;
 	
+	
+	public Action() {
+		super();
+	}
 	public Action(ILink url, String name, String displayName) {
 		this(url, name, displayName, null);
 	}

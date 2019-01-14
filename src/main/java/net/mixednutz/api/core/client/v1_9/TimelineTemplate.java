@@ -1,7 +1,8 @@
 package net.mixednutz.api.core.client.v1_9;
 
 import static net.mixednutz.api.core.client.v1_9.ConversionUtils.convertPage;
-import static net.mixednutz.api.core.client.v1_9.ConversionUtils.convertToDate;
+import static net.mixednutz.api.core.client.v1_9.ConversionUtils.convertToV1_9;
+import static net.mixednutz.api.core.client.v1_9.ConversionUtils.parseStringPaginationToken;
 
 import java.time.Instant;
 import java.util.Date;
@@ -17,7 +18,9 @@ import net.mixednutz.api.client.TimelineClient;
 import net.mixednutz.api.core.model.NetworkInfo;
 import net.mixednutz.api.core.model.Page;
 import net.mixednutz.api.core.model.TimelineElement;
+import net.mixednutz.api.model.IPage;
 import net.mixednutz.api.model.IPageRequest;
+import net.mixednutz.api.model.ITimelineElement;
 
 public class TimelineTemplate extends AbstractMixednutzOperations implements TimelineClient<Instant> {
 	
@@ -29,10 +32,15 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 		this.restTemplate = restTemplate;
 		this.networkInfo = networkInfo;
 	}
-
+	
 	@Override
 	public Page<TimelineElement, Instant> getTimeline() {
 		return getTimeline(null);
+	}
+
+	@Override
+	public IPage<? extends ITimelineElement, Instant> getTimelineStringToken(IPageRequest<String> pagination) {
+		return this.getTimeline(parseStringPaginationToken(pagination));
 	}
 
 	@Override
@@ -40,8 +48,12 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 		requireAuthorization();
 		
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
+		if (pagination!=null && pagination.getStart()==null) {
+			//MN 1.9 expects a NULL pagination for the first page.
+			pagination = null;
+		}
 		if (pagination!=null) {
-			datepagination = convertToDate(pagination);
+			datepagination = convertToV1_9(pagination);
 		}
 		HttpEntity<net.mixednutz.api.core.model.v1_9.Pagination<Date>> requestEntity = new HttpEntity<>(datepagination);
 				
@@ -72,10 +84,15 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 	}
 
 	@Override
+	public IPage<? extends ITimelineElement, Instant> getPublicTimelineStringToken(IPageRequest<String> pagination) {
+		return this.getPublicTimeline(parseStringPaginationToken(pagination));
+	}
+
+	@Override
 	public Page<TimelineElement, Instant> getPublicTimeline(IPageRequest<Instant> pagination) {
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
 		if (pagination!=null) {
-			datepagination = convertToDate(pagination);
+			datepagination = convertToV1_9(pagination);
 		}
 		HttpEntity<net.mixednutz.api.core.model.v1_9.Pagination<Date>> requestEntity = new HttpEntity<>(datepagination);
 				

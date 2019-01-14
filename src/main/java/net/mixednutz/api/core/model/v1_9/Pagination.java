@@ -1,7 +1,5 @@
 package net.mixednutz.api.core.model.v1_9;
 
-import net.mixednutz.api.model.SortDirection;
-
 /**
  * The Page object coming from the service represents the next
  * page in both directions.  It contains the Token from the head of the items list and the tail
