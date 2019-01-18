@@ -56,8 +56,10 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 		requireAuthorization();
 		
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
+		Integer pageSize = null;
 		if (pagination!=null && pagination.getStart()==null) {
 			//MN 1.9 expects a NULL pagination for the first page.
+			pageSize = pagination.getPageSize();
 			pagination = null;
 		}
 		if (pagination!=null) {
@@ -67,7 +69,7 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 				
 		String url = networkInfo.getTimelineUrl();
 		HttpMethod method = HttpMethod.GET;
-		Integer pageSize = null;
+		
 		if (pagination!=null) {
 			url = networkInfo.getTimelineNextPageUrl();
 			method = HttpMethod.POST;

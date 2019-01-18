@@ -1,5 +1,7 @@
 package net.mixednutz.api.core.client.v1_9;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.Instant;
 
 import org.junit.Ignore;
@@ -16,7 +18,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import net.mixednutz.api.client.MixednutzClient;
 import net.mixednutz.api.core.model.NetworkInfo;
 import net.mixednutz.api.core.model.Page;
+import net.mixednutz.api.core.model.PageRequest;
 import net.mixednutz.api.core.model.TimelineElement;
+import net.mixednutz.api.model.IPageRequest.Direction;
 
 public class TimelineTemplateTest {
 	
@@ -116,6 +120,50 @@ public class TimelineTemplateTest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+//	@Ignore
+	@Test
+	public void testGetTimelinePagination() {
+		String baseUrl = "https://localhost:8443/mixednutz-web";
+		NetworkInfo networkInfo = new NetworkInfo();
+		networkInfo.setHostName("localhost");
+		networkInfo.setOauth2AuthorizeUrl(baseUrl+"/oauth/authorize");
+		networkInfo.setOauth2TokenUrl(baseUrl+"/oauth/token");
+		networkInfo.setTimelineUrl(baseUrl+"/api/nutsterz/timeline");
+		networkInfo.setTimelineNextPageUrl(baseUrl+"/api/nutsterz/timeline/nextpage");
+		networkInfo.setUserProfileUrl(baseUrl+"/api/loggedin/user");
+		
+		MixednutzConnectionFactory connectionFactory= new MixednutzConnectionFactory(
+				networkInfo, CLIENT_ID, CLIENT_SECRET);
+		
+		AccessGrant accessGrant = new AccessGrant(
+				ACCESS_TOKEN, SCOPE, REFRESH_TOKEN, EXPIRES_IN);
+		Connection<MixednutzClient> conn = connectionFactory.createConnection(accessGrant);
+		
+		MixednutzClient mixednutz = conn.getApi();
+		timelineTemplate = (TimelineTemplate) mixednutz.getTimelineClient();
+		
+		
+		//First 10
+		Page<TimelineElement, Instant> page = timelineTemplate.getTimeline(
+				PageRequest.first(10, Direction.GREATER_THAN, Instant.class));
+		assertEquals(10, page.getItems().size());
+		
+		
+		
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
+		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+		try {
+			System.out.println(mapper.writeValueAsString(page));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+
 	}
 	
 	@Ignore
