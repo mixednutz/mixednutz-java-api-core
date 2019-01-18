@@ -17,9 +17,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import net.mixednutz.api.client.TimelineClient;
 import net.mixednutz.api.core.model.NetworkInfo;
 import net.mixednutz.api.core.model.Page;
+import net.mixednutz.api.core.model.PageRequest;
 import net.mixednutz.api.core.model.TimelineElement;
 import net.mixednutz.api.model.IPage;
 import net.mixednutz.api.model.IPageRequest;
+import net.mixednutz.api.model.IPageRequest.Direction;
 import net.mixednutz.api.model.ITimelineElement;
 
 public class TimelineTemplate extends AbstractMixednutzOperations implements TimelineClient<Instant> {
@@ -33,6 +35,12 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 		this.networkInfo = networkInfo;
 	}
 	
+	@Override
+	public <T> IPageRequest<T> getTimelinePollRequest(T start) {
+		// Get posts from starting time.  Limit 200.
+		return PageRequest.next(start, 200, Direction.GREATER_THAN);
+	}
+
 	@Override
 	public Page<TimelineElement, Instant> getTimeline() {
 		return getTimeline(null);
