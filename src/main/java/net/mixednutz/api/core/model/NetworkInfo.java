@@ -2,13 +2,8 @@ package net.mixednutz.api.core.model;
 
 import net.mixednutz.api.model.INetworkInfo;
 
-public class NetworkInfo implements INetworkInfo {
+public class NetworkInfo extends NetworkInfoSmall implements INetworkInfo {
 
-	private String id;
-	private String displayName;
-	private String hostName;
-	private String fontAwesomeIconName;
-	
 	private String oauth2AuthorizeUrl;
 	private String oauth2TokenUrl;
 	private String timelineUrl;
@@ -23,33 +18,9 @@ public class NetworkInfo implements INetworkInfo {
 		super();
 	}
 	public NetworkInfo(String hostName) {
-		super();
-		this.hostName = hostName;
+		super(hostName);
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getDisplayName() {
-		return displayName;
-	}
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
-	public String getHostName() {
-		return hostName;
-	}
-	public void setHostName(String hostName) {
-		this.hostName = hostName;
-	}
-	public String getFontAwesomeIconName() {
-		return fontAwesomeIconName;
-	}
-	public void setFontAwesomeIconName(String fontAwesomeIconName) {
-		this.fontAwesomeIconName = fontAwesomeIconName;
-	}
+	
 	public String getOauth2AuthorizeUrl() {
 		return oauth2AuthorizeUrl;
 	}

@@ -4,13 +4,23 @@ import net.mixednutz.api.model.IReshareCount;
 
 public class ReshareCount implements IReshareCount {
 
-	private NetworkInfo networkInfo;
+	private NetworkInfoSmall networkInfo;
 	private Integer count;
 	
-	public NetworkInfo getNetworkInfo() {
+	public ReshareCount() {
+		super();
+	}
+	
+	public ReshareCount(Integer count, NetworkInfoSmall networkInfo) {
+		super();
+		this.count = count;
+		this.networkInfo = networkInfo;
+	}
+
+	public NetworkInfoSmall getNetworkInfo() {
 		return networkInfo;
 	}
-	public void setNetworkInfo(NetworkInfo networkInfo) {
+	public void setNetworkInfo(NetworkInfoSmall networkInfo) {
 		this.networkInfo = networkInfo;
 	}
 	public Integer getCount() {
