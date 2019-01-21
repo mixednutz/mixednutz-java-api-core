@@ -56,25 +56,24 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 		requireAuthorization();
 		
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
+		String url = networkInfo.getTimelineUrl();
+		HttpMethod method = HttpMethod.GET;
 		Integer pageSize = null;
 		if (pagination!=null && pagination.getStart()==null) {
-			//MN 1.9 expects a NULL pagination for the first page.
+			/*
+			 * MN 1.9 expects a NULL pagination for the first page. 
+			 * Save off pageSize and null out pagination.  
+			 */
 			pageSize = pagination.getPageSize();
 			pagination = null;
 		}
 		if (pagination!=null) {
 			datepagination = convertToV1_9(pagination);
+			url = networkInfo.getTimelineNextPageUrl();
+			method = HttpMethod.POST;
 		}
 		HttpEntity<net.mixednutz.api.core.model.v1_9.Pagination<Date>> requestEntity = new HttpEntity<>(datepagination);
 				
-		String url = networkInfo.getTimelineUrl();
-		HttpMethod method = HttpMethod.GET;
-		
-		if (pagination!=null) {
-			url = networkInfo.getTimelineNextPageUrl();
-			method = HttpMethod.POST;
-			pageSize = pagination.getPageSize();
-		}
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
 		if (pageSize!=null) {
 			builder.queryParam("pageSize", pageSize);

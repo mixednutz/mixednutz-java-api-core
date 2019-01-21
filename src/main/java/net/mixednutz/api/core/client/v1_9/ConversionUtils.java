@@ -20,8 +20,9 @@ class ConversionUtils {
 					pagination.getPageSize(),
 					pagination.getDirection());
 		} 
-		//MN 1.9 expects a NULL pagination for the first page.
-		return null;
+		return PageRequest.first(
+				pagination.getPageSize(), 
+				pagination.getDirection(), Instant.class);
 	}
 
 	static Page<TimelineElement, Instant> convertPage(net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date> page,
