@@ -13,9 +13,9 @@ public class Page<D, Token> implements IPage<D, Token> {
 
 	private List<D> items;
 	private PageRequest<Token> pageRequest;
-	private PageRequest<Token> prevPage;
+	private PageRequest<Token> reversePage;
 	private PageRequest<Token> nextPage;
-	private boolean hasPrev;
+	private boolean hasReverse;
 	private boolean hasNext;
 	
 	public List<D> getItems() {
@@ -25,14 +25,15 @@ public class Page<D, Token> implements IPage<D, Token> {
 		this.items = items;
 	}
 	/**
-	 * Get the request for the previous page according to the tokens and sort.
+	 * Reverses the pagination and returns the first page in the opposite direction.
+	 * Reverse should only be called once and subsequent requests should use nextPage.
 	 * @return
 	 */
-	public PageRequest<Token> getPrevPage() {
-		return prevPage;
+	public PageRequest<Token> getReversePage() {
+		return reversePage;
 	}
-	public void setPrevPage(PageRequest<Token> nextPage) {
-		this.prevPage = nextPage;
+	public void setReversePage(PageRequest<Token> reverse) {
+		this.reversePage = reverse;
 	}
 	/**
 	 * Get the current page request
@@ -51,8 +52,8 @@ public class Page<D, Token> implements IPage<D, Token> {
 	public PageRequest<Token> getNextPage() {
 		return nextPage;
 	}
-	public void setNextPage(PageRequest<Token> previousPage) {
-		this.nextPage = previousPage;
+	public void setNextPage(PageRequest<Token> nextPage) {
+		this.nextPage = nextPage;
 	}
 	@JsonGetter
 	public boolean hasNext() {
@@ -62,11 +63,11 @@ public class Page<D, Token> implements IPage<D, Token> {
 		this.hasNext = hasNext;
 	}
 	@JsonGetter
-	public boolean hasPrev() {
-		return hasPrev;
+	public boolean hasReverse() {
+		return hasReverse;
 	}
-	public void setHasPrev(boolean hasPrev) {
-		this.hasPrev = hasPrev;
+	public void setHasReverse(boolean hasReverse) {
+		this.hasReverse = hasReverse;
 	}
 	
 }

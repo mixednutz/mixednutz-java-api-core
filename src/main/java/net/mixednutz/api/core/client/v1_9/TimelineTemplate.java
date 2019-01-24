@@ -52,13 +52,14 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 	}
 
 	@Override
-	public Page<TimelineElement, Instant> getTimeline(IPageRequest<Instant> pagination) {
+	public Page<TimelineElement, Instant> getTimeline(IPageRequest<Instant> pageRequest) {
 		requireAuthorization();
 		
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
 		String url = networkInfo.getTimelineUrl();
 		HttpMethod method = HttpMethod.GET;
 		Integer pageSize = null;
+		IPageRequest<Instant> pagination = pageRequest; //copy
 		if (pagination!=null && pagination.getStart()==null) {
 			/*
 			 * MN 1.9 expects a NULL pagination for the first page. 
@@ -84,7 +85,7 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 						new ParameterizedTypeReference<net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date>>() {
 						});
 		
-		return convertPage(responseEntity.getBody(), pageSize);
+		return convertPage(responseEntity.getBody(), pageSize, pageRequest);
 	}
 	
 	@Override
@@ -98,8 +99,9 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 	}
 
 	@Override
-	public Page<TimelineElement, Instant> getPublicTimeline(IPageRequest<Instant> pagination) {
+	public Page<TimelineElement, Instant> getPublicTimeline(IPageRequest<Instant> pageRequest) {
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
+		IPageRequest<Instant> pagination = pageRequest; //copy
 		if (pagination!=null) {
 			datepagination = convertToV1_9(pagination);
 		}
@@ -123,7 +125,7 @@ public class TimelineTemplate extends AbstractMixednutzOperations implements Tim
 						new ParameterizedTypeReference<net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date>>() {
 						});
 		
-		return convertPage(responseEntity.getBody(), pageSize);
+		return convertPage(responseEntity.getBody(), pageSize, pageRequest);
 	}
 
 

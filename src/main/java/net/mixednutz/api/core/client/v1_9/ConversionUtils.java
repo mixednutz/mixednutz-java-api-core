@@ -26,30 +26,47 @@ class ConversionUtils {
 	}
 
 	static Page<TimelineElement, Instant> convertPage(net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date> page,
-			Integer pageSize) {
+			Integer pageSize, IPageRequest<Instant> pageRequest) {
 		ArrayList<TimelineElement> newItemList = new ArrayList<>();
 		for (net.mixednutz.api.core.model.v1_9.TimelineElement item: page.getItems()) {
 			newItemList.add(item.toTimelineElement());
 		}
 		Page<TimelineElement, Instant> newPage = new Page<TimelineElement, Instant>();
 		newPage.setItems(newItemList);
-		if (page.getCurrentPage()!=null) {
-			newPage.setPageRequest(convertFromV1_9(page.getCurrentPage(), pageSize,
-					page.getCurrentPage().getBefore(), page.getCurrentPage().getAfter()));
+		if (pageRequest!=null) {
+			newPage.setPageRequest(copyPageRequest(pageRequest));
 		}
+		
 		if (page.getNextPage()!=null) {
 			if (page.getNextPage().getAfter()!=null) {
-				newPage.setPrevPage(convertFromV1_9(page.getNextPage(), pageSize, 
-						null, page.getNextPage().getAfter()));
-				newPage.setHasPrev(true);
+				PageRequest<Instant> nextPage = convertFromV1_9(page.getNextPage(), pageSize, 
+						null, page.getNextPage().getAfter());
+				if (pageRequest!=null && Direction.GREATER_THAN.equals(pageRequest.getDirection())) {
+					newPage.setNextPage(nextPage);
+					newPage.setHasNext(true);
+				} else {
+					newPage.setReversePage(nextPage);
+					newPage.setHasReverse(true);
+				}
 			}
 			if (page.getNextPage().getBefore()!=null) {
-				newPage.setNextPage(convertFromV1_9(page.getNextPage(), pageSize, 
-						page.getNextPage().getBefore(), null));
-				newPage.setHasNext(true);
+				PageRequest<Instant> nextPage = convertFromV1_9(page.getNextPage(), pageSize, 
+						page.getNextPage().getBefore(), null);
+				if (pageRequest!=null && Direction.GREATER_THAN.equals(pageRequest.getDirection())) {
+					newPage.setReversePage(nextPage);
+					newPage.setHasReverse(true);
+				} else {
+					newPage.setNextPage(nextPage);
+					newPage.setHasNext(true);
+				}
 			}
 		}
 		return newPage;
+	}
+	
+	static <T> PageRequest<T> copyPageRequest(IPageRequest<T> pageRequest) {
+		return PageRequest.next(pageRequest.getStart(), pageRequest.getPageSize(), 
+				pageRequest.getDirection());
 	}
 	
 	static net.mixednutz.api.core.model.v1_9.Pagination<Date> convertToV1_9(IPageRequest<Instant> instantPagination) {

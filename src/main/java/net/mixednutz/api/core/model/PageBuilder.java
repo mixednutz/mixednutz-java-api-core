@@ -67,19 +67,19 @@ public class PageBuilder<D,Token> {
 			page.setNextPage(PageRequest.next(nextPageStart, 
 					pageRequest.getPageSize(), pageRequest.getDirection()));
 			page.setHasNext(true);
-			page.setPrevPage(PageRequest.next(prevPageStart, 
+			page.setReversePage(PageRequest.next(prevPageStart, 
 					pageRequest.getPageSize(), pageRequest.getDirection().equals(
 							Direction.LESS_THAN)?Direction.GREATER_THAN:Direction.LESS_THAN));
-			page.setHasPrev(true);
+			page.setHasReverse(true);
 		} else {
 			page.setHasNext(false);
 			if (pageRequest.getStart()!=null) {
-				page.setPrevPage(PageRequest.next(pageRequest.getStart(),
+				page.setReversePage(PageRequest.next(pageRequest.getStart(),
 						pageRequest.getPageSize(), pageRequest.getDirection().equals(
 								Direction.LESS_THAN)?Direction.GREATER_THAN:Direction.LESS_THAN));
-				page.setHasPrev(true);
+				page.setHasReverse(true);
 			} else {
-				page.setHasPrev(false);
+				page.setHasReverse(false);
 			}
 		}
 		

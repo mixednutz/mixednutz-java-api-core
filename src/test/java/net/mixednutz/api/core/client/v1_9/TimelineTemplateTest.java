@@ -79,8 +79,8 @@ public class TimelineTemplateTest {
 		}
 		
 		//PREV PAGE
-		System.out.println(page.getPrevPage());
-		page = timelineTemplate.getTimeline(page.getPrevPage());
+		System.out.println(page.getReversePage());
+		page = timelineTemplate.getTimeline(page.getReversePage());
 		
 		try {
 			System.out.println(mapper.writeValueAsString(page));
@@ -121,8 +121,8 @@ public class TimelineTemplateTest {
 		}
 		
 	}
-	
-//	@Ignore
+		
+	@Ignore
 	@Test
 	public void testGetTimelinePagination() {
 		String baseUrl = "https://localhost:8443/mixednutz-web";
@@ -163,6 +163,68 @@ public class TimelineTemplateTest {
 		}
 		
 		
+
+	}
+	
+	@Ignore
+	@Test
+	public void testPoll() {
+		/**
+		 * this time derive network info from the baseurl
+		 */
+		String baseUrl = "https://localhost:8443/mixednutz-web";
+				
+		MixednutzConnectionFactory connectionFactory= new MixednutzConnectionFactory(
+				baseUrl, CLIENT_ID, CLIENT_SECRET);
+		
+		AccessGrant accessGrant = new AccessGrant(
+				ACCESS_TOKEN, SCOPE, REFRESH_TOKEN, EXPIRES_IN);
+		Connection<MixednutzClient> conn = connectionFactory.createConnection(accessGrant);
+		
+		MixednutzClient mixednutz = conn.getApi();
+		timelineTemplate = (TimelineTemplate) mixednutz.getTimelineClient();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
+		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+		
+		//FIRST PAGE
+		Page<TimelineElement, Instant> page = timelineTemplate.getTimeline(
+				timelineTemplate.getTimelinePollRequest(null));
+		System.out.println("Found "+page.getItems().size()+" items");
+		try {
+			System.out.println(mapper.writeValueAsString(page));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		//NEXT PREV PAGE
+		System.out.println("Next: "+page.getNextPage());
+		System.out.println("Rev:"+page.getReversePage());
+		page = timelineTemplate.getTimeline(page.getNextPage());
+		System.out.println("Found "+page.getItems().size()+" items");
+		try {
+			System.out.println(mapper.writeValueAsString(page));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (page.hasNext()) {
+			//NEXT PREV PAGE
+			System.out.println("Next: "+page.getNextPage());
+			System.out.println("Rev:"+page.getReversePage());
+			page = timelineTemplate.getTimeline(page.getNextPage());
+			System.out.println("Found "+page.getItems().size()+" items");
+			try {
+				System.out.println(mapper.writeValueAsString(page));
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 	
