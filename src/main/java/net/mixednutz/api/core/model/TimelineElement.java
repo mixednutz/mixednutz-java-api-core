@@ -177,16 +177,18 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 
 		String name;
 		String namespace;
+		String id;
 
 		public Type() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
 
-		public Type(String name, String namespace) {
+		public Type(String name, String namespace, String id) {
 			super();
 			this.name = name;
 			this.namespace = namespace;
+			this.id = id;
 		}
 
 		public String getName() {
@@ -203,6 +205,14 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 
 		public void setNamespace(String namespace) {
 			this.namespace = namespace;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
 		}
 
 	}
