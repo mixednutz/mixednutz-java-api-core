@@ -20,12 +20,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import net.mixednutz.api.client.UserClient;
 import net.mixednutz.api.core.model.NetworkInfo;
 import net.mixednutz.api.core.model.Page;
+import net.mixednutz.api.core.model.PageRequest;
 import net.mixednutz.api.core.model.TimelineElement;
 import net.mixednutz.api.core.model.v1_9.UserSmall;
 import net.mixednutz.api.model.IPage;
 import net.mixednutz.api.model.IPageRequest;
 import net.mixednutz.api.model.ITimelineElement;
 import net.mixednutz.api.model.IUserSmall;
+import net.mixednutz.api.model.IPageRequest.Direction;
 
 public class UserTemplate extends AbstractMixednutzOperations implements UserClient<Instant> {
 
@@ -56,6 +58,12 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 	public IUserSmall getUser(String username) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public <T> IPageRequest<T> getUserTimelinePollRequest(T start) {
+		// Get posts from starting time.  Limit 200.
+		return PageRequest.next(start, 200, Direction.GREATER_THAN);
 	}
 
 	@Override
