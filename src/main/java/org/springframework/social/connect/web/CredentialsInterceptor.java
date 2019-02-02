@@ -33,7 +33,7 @@ public class CredentialsInterceptor<S, O> extends SessionObjectConnectIntercepto
 	protected O getObjectForSession(
 			ConnectionFactory<S> connectionFactory,
 			MultiValueMap<String, String> parameters, WebRequest request) {
-		return (O) callback.instantiate(connectionFactory);
+		return (O) callback.instantiate(connectionFactory, request);
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package org.springframework.social.connect.web;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactory;
+import org.springframework.web.context.request.WebRequest;
 
 import net.mixednutz.api.provider.ICredentials;
 import net.mixednutz.api.provider.IOauth1Credentials;
@@ -15,7 +16,13 @@ import net.mixednutz.api.provider.IOauth2Credentials;
  */
 public interface CredentialsCallback {
 
-	public ICredentials instantiate(ConnectionFactory<?> connectionFactory);
+	/**
+	 * Create a new ICredentials instance to place in the session.
+	 * 
+	 * @param connectionFactory
+	 * @return
+	 */
+	public ICredentials instantiate(ConnectionFactory<?> connectionFactory, WebRequest request);
 	
 	public void save(IOauth1Credentials creds, Connection<?> connection);
 	
