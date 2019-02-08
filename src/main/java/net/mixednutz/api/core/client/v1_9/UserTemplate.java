@@ -82,26 +82,32 @@ public class UserTemplate extends AbstractMixednutzOperations implements UserCli
 		requireAuthorization();
 		
 		net.mixednutz.api.core.model.v1_9.Pagination<Date> datepagination =null;
-		IPageRequest<Instant> pagination = pageRequest; //copy
-		Map<String, Object> uriVariables = new HashMap<>();
-		uriVariables.put("username", username);
-		if (pagination!=null) {
-			datepagination = convertToV1_9(pagination);
-		}
-		HttpEntity<net.mixednutz.api.core.model.v1_9.Pagination<Date>> requestEntity = new HttpEntity<>(datepagination);
-				
 		String url = networkInfo.getUserTimelineUrl();
 		HttpMethod method = HttpMethod.GET;
 		Integer pageSize = null;
+		IPageRequest<Instant> pagination = pageRequest; //copy
+		if (pagination!=null && pagination.getStart()==null) {
+			/*
+			 * MN 1.9 expects a NULL pagination for the first page. 
+			 * Save off pageSize and null out pagination.  
+			 */
+			pageSize = pagination.getPageSize();
+			pagination = null;
+		}
 		if (pagination!=null) {
+			datepagination = convertToV1_9(pagination);
 			url = networkInfo.getUserTimelineNextPageUrl();
 			method = HttpMethod.POST;
-			pageSize = pagination.getPageSize();
-		}
+		}	
+		HttpEntity<net.mixednutz.api.core.model.v1_9.Pagination<Date>> requestEntity = new HttpEntity<>(datepagination);
+				
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
 		if (pageSize!=null) {
 			builder.queryParam("pageSize", pageSize);
 		}
+		
+		Map<String, Object> uriVariables = new HashMap<>();
+		uriVariables.put("username", username);
 		
 		ResponseEntity<net.mixednutz.api.core.model.v1_9.Page<net.mixednutz.api.core.model.v1_9.TimelineElement, Date>> responseEntity = restTemplate
 				.exchange(builder.toUriString(), method, requestEntity,
