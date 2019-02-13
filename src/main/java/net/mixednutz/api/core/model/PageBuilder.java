@@ -1,5 +1,7 @@
 package net.mixednutz.api.core.model;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import net.mixednutz.api.model.IPageRequest.Direction;
@@ -17,7 +19,9 @@ public class PageBuilder<D,Token> {
 	List<D> items;
 	PageRequest<Token> pageRequest;
 	GetTokenCallback<D,Token> tokenCallback;
+	Comparator<D> reSortComparator;
 	boolean descending = true;
+	boolean trimToPageSize = false;
 	
 	public PageBuilder<D,Token> setItems(List<D> items) {
 		this.items = items;
@@ -34,6 +38,17 @@ public class PageBuilder<D,Token> {
 		return this;
 	}
 	
+	/**
+	 * The implementation of comparator should sort items in the same direction 
+	 * specified by {@link #setDescending(boolean)}
+	 * @param comparator
+	 * @return
+	 */
+	public PageBuilder<D,Token> setReSortComparator(Comparator<D> comparator) {
+		this.reSortComparator = comparator;
+		return this;
+	}
+	
 	public PageBuilder<D,Token> setDescending() {
 		return setDescending(true);
 	}
@@ -47,7 +62,24 @@ public class PageBuilder<D,Token> {
 		return setDescending(false);
 	}
 	
+	public PageBuilder<D,Token>  setTrimToPageSize(boolean trimToPageSize) {
+		this.trimToPageSize = trimToPageSize;
+		return this;
+	}
+	
 	public Page<D,Token> build() {
+		
+		if (this.reSortComparator!=null) {
+			Collections.sort(items, reSortComparator);
+		}
+		if (trimToPageSize && (items.size() > pageRequest.getPageSize())) {
+			if (pageRequest.getDirection().equals(Direction.LESS_THAN)) {
+				items = descending ? items.subList(0, pageRequest.getPageSize()) : items.subList(items.size()-pageRequest.getPageSize(), items.size());
+			} else {
+				items = !descending ? items.subList(0, pageRequest.getPageSize()) : items.subList(items.size()-pageRequest.getPageSize(), items.size());
+			}
+		}		
+		
 		final Page<D,Token> page = new Page<D,Token>();
 		page.setItems(items);
 		page.setPageRequest(pageRequest);
