@@ -4,6 +4,7 @@ import net.mixednutz.api.model.INetworkInfo;
 
 public class NetworkInfo extends NetworkInfoSmall implements INetworkInfo {
 
+	private String baseUrl;
 	private String oauth2AuthorizeUrl;
 	private String oauth2TokenUrl;
 	private String timelineUrl;
@@ -21,6 +22,12 @@ public class NetworkInfo extends NetworkInfoSmall implements INetworkInfo {
 		super(hostName);
 	}
 	
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
 	public String getOauth2AuthorizeUrl() {
 		return oauth2AuthorizeUrl;
 	}
