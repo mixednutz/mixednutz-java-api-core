@@ -137,7 +137,7 @@ public class InternalTimelineElement<ID extends Serializable> extends TimelineEl
 				newtag.setDisplayName(tag.getDisplayName());
 				newtag.setCount(tag.getCount());
 				newtag.setToggleAction(new Action(
-						new Link(url+"/tag/toggle"), 
+						new Link(url+"/tag/toggle?tag="+tag.getName()), 
 						"tag_"+tag.getName(), 
 						tag.getName()));
 			}
@@ -149,7 +149,7 @@ public class InternalTimelineElement<ID extends Serializable> extends TimelineEl
 				newreaction.setDescription(reaction.getDescription());
 				newreaction.setCount(reaction.getCount());
 				newreaction.setToggleAction(new Action(
-						new Link(url+"/reaction/toggle"),
+						new Link(url+"/reaction/toggle?emojiId="+reaction.getId()),
 						"emoji_"+reaction.getId(),
 						reaction.getUnicode(), 
 						reaction.getDescription()));
