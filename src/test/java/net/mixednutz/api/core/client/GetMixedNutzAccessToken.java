@@ -8,7 +8,9 @@ import java.net.URISyntaxException;
 import java.util.Date;
 
 import org.apache.commons.codec.binary.Base64;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,7 +25,9 @@ import org.springframework.web.client.RestTemplate;
 
 import net.mixednutz.api.client.MixednutzClient;
 import net.mixednutz.api.core.model.NetworkInfo;
+import net.mixednutz.api.core.test.IntegrationTest;
 
+@Category(IntegrationTest.class)
 public class GetMixedNutzAccessToken {
 	
 	public static final String CLIENT_ID = "mixednutzjavaapi";
@@ -80,6 +84,7 @@ public class GetMixedNutzAccessToken {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void testHttpBasic() throws RestClientException, URISyntaxException {
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();

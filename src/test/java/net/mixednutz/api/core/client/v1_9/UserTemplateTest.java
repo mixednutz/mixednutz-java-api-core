@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.mixednutz.v1_9.connect.MixednutzConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
@@ -17,8 +18,9 @@ import net.mixednutz.api.client.MixednutzClient;
 import net.mixednutz.api.core.model.NetworkInfo;
 import net.mixednutz.api.core.model.Page;
 import net.mixednutz.api.core.model.TimelineElement;
+import net.mixednutz.api.core.test.IntegrationTest;
 
-
+@Category(IntegrationTest.class)
 public class UserTemplateTest {
 	
 	private static final String CLIENT_ID = "mixednutzjavaapi";

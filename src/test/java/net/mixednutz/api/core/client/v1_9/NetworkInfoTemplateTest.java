@@ -2,19 +2,24 @@ package net.mixednutz.api.core.client.v1_9;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import net.mixednutz.api.core.test.IntegrationTest;
 import net.mixednutz.api.model.INetworkInfo;
 
+@Category(IntegrationTest.class)
 public class NetworkInfoTemplateTest {
 	
 	private NetworkInfoTemplate networkInfoTemplate;
 	
+	@Ignore
 	@Test
 	public void getNetworkInfo() {
 		String baseUrl = "https://localhost:8443/mixednutz-web";
