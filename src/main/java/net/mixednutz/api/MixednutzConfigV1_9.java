@@ -3,6 +3,7 @@ package net.mixednutz.api;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.social.connect.web.CredentialsCallback;
 import org.springframework.social.connect.web.CredentialsInterceptor;
 import org.springframework.social.mixednutz.v1_9.connect.MixednutzConnectionFactory;
@@ -12,6 +13,7 @@ import net.mixednutz.api.core.provider.v1_9.MixednutzProvider;
 import net.mixednutz.api.provider.IOauth2Credentials;
 
 @Configuration
+@Profile("mixednutz_base")
 @ConfigurationProperties(prefix="mixednutz.social")
 public class MixednutzConfigV1_9 {
 	
