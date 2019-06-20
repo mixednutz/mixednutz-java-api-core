@@ -1,5 +1,7 @@
 package net.mixednutz.api.core.model;
 
+import java.util.function.Function;
+
 import net.mixednutz.api.model.IPageRequest;
 
 public class PageRequest<Token> implements IPageRequest<Token> {
@@ -29,6 +31,24 @@ public class PageRequest<Token> implements IPageRequest<Token> {
 		return new PageRequest<Token>(pageSize, direction);
 	}
 	
+	/**
+	 * Converts a PageRequest from one generic instance to another
+	 * 
+	 * @param from
+	 * @param tokenDestClass
+	 * @param function
+	 * @return
+	 */
+	public static <TokenSource, TokenDest> PageRequest<TokenDest> convert(IPageRequest<TokenSource> from, Class<TokenDest> tokenDestClass, Function<TokenSource,TokenDest> function) {
+		PageRequest<TokenDest> pageRequest;
+		if (from.getStart()==null) {
+			pageRequest = first(from.getPageSize(), from.getDirection(), tokenDestClass);
+		} else {
+			pageRequest = next(function.apply(from.getStart()), from.getPageSize(), from.getDirection());
+		}
+		return pageRequest;
+	}
+		
 	public Token getStart() {
 		return start;
 	}

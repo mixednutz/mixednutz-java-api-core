@@ -1,5 +1,6 @@
 package net.mixednutz.api.core.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -25,6 +26,21 @@ public class PageBuilder<D,Token> {
 	
 	public PageBuilder<D,Token> setItems(List<D> items) {
 		this.items = items;
+		return this;
+	}
+	
+	public PageBuilder<D,Token> defaultItems() {
+		this.items = new ArrayList<>();
+		return this;
+	}
+	
+	public PageBuilder<D,Token> addItems(List<? extends D> items) {
+		if (this.items==null) {
+			defaultItems();
+		}
+		for (D element: items) {
+			this.items.add(element);
+		}
 		return this;
 	}
 	
