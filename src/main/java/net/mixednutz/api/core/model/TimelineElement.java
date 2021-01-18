@@ -73,6 +73,12 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 	 * Optional count of times this element has been reshared by network.
 	 */
 	private List<ReshareCount> reshares;
+	
+	/**
+	 * Optional list of comments about this element
+	 */
+	private List<TimelineElement> comments;
+	
 
 	public Type getType() {
 		return type;
@@ -168,6 +174,14 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 
 	public void setReshares(List<ReshareCount> reshares) {
 		this.reshares = reshares;
+	}
+
+	public List<TimelineElement> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<TimelineElement> comments) {
+		this.comments = comments;
 	}
 
 	/**
