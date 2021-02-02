@@ -4,19 +4,31 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notification {
+import net.mixednutz.api.model.INotification;
+
+public class Notification extends ApiResource implements INotification {
 
 	private String topic;
 	private Link iconUrl;
 	private String message;
 	private String htmlMessage;
-	private String uri;
-	private String url;
 	private ZonedDateTime dateNotified;
 	private NotificationIds notificationIds;
 	
 	public Notification() {
 		super();
+	}
+	public Notification(String topic, String iconUrl, String message, 
+			String htmlMessage, String uri, ZonedDateTime dateNotified, 
+			List<Long> notificationIds) {
+		super();
+		this.topic = topic;
+		this.iconUrl = new Link(iconUrl);
+		this.htmlMessage = htmlMessage;
+		this.message = message;
+		this.setUri(uri);
+		this.dateNotified = dateNotified;
+		this.notificationIds = new NotificationIds(notificationIds);
 	}
 	
 	public String getTopic() {
@@ -43,19 +55,6 @@ public class Notification {
 	public void setHtmlMessage(String message) {
 		this.htmlMessage = message;
 	}
-	public String getUri() {
-		return uri;
-	}
-	public void setUri(String uri) {
-		this.uri = uri;
-	}
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
 	public ZonedDateTime getDateNotified() {
 		return dateNotified;
 	}
@@ -71,6 +70,11 @@ public class Notification {
 	
 	public static class NotificationIds {
 		private List<Long> ids = new ArrayList<>();
+
+		public NotificationIds(List<Long> ids) {
+			super();
+			this.ids = ids;
+		}
 
 		public List<Long> getIds() {
 			return ids;
