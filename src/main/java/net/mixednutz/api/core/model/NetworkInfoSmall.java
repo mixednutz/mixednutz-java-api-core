@@ -16,6 +16,13 @@ public class NetworkInfoSmall implements INetworkInfoSmall {
 		super();
 		this.hostName = hostName;
 	}
+	public NetworkInfoSmall(NetworkInfo copy) {
+		super();
+		this.id = copy.getId();
+		this.displayName = copy.getDisplayName();
+		this.hostName = copy.getHostName();
+		this.fontAwesomeIconName = copy.getFontAwesomeIconName();
+	}
 	public String getId() {
 		return id;
 	}
@@ -44,5 +51,5 @@ public class NetworkInfoSmall implements INetworkInfoSmall {
 	public String[] compatibleMimeTypes() {
 		return new String[]{};
 	}
-	
+		
 }

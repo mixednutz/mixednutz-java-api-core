@@ -7,6 +7,7 @@ import org.springframework.social.support.ClientHttpRequestFactorySelector;
 
 import net.mixednutz.api.client.GroupClient;
 import net.mixednutz.api.client.MixednutzClient;
+import net.mixednutz.api.client.PostClient;
 import net.mixednutz.api.client.TimelineClient;
 import net.mixednutz.api.client.UserClient;
 import net.mixednutz.api.core.model.NetworkInfo;
@@ -63,6 +64,12 @@ public class MixednutzTemplate extends AbstractOAuth2ApiBinding implements Mixed
 		return userClient;
 	}
 	
+	@Override
+	public PostClient<?> getPostClient() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// private helpers
 	private void initialize() {
 		// Wrap the request factory with a BufferingClientHttpRequestFactory so that the error handler can do repeat reads on the response.getBody()
