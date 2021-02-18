@@ -21,6 +21,17 @@
 		<version>2.0.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
+	<!-- 
+		Deploy JARs to GitHub
+	 -->
+	<distributionManagement>
+	   	<repository>
+     			<id>github</id>
+     			<name>GitHub MixedNutz Apache Maven Packages</name>
+     			<url>https://maven.pkg.github.com/mixednutz/mixednutz-java-api</url>
+   		</repository>
+	</distributionManagement>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
