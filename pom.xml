@@ -29,7 +29,7 @@
 	   	<repository>
      			<id>github</id>
      			<name>GitHub MixedNutz Apache Maven Packages</name>
-     			<url>https://maven.pkg.github.com/mixednutz/mixednutz-java-api</url>
+     			<url>https://maven.pkg.github.com/mixednutz/${project.artifactId}</url>
    		</repository>
 	</distributionManagement>
 
