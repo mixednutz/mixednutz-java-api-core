@@ -32,6 +32,14 @@
      			<url>https://maven.pkg.github.com/mixednutz/${project.artifactId}</url>
    		</repository>
 	</distributionManagement>
+	
+	<repositories>
+		<repository>
+			<id>mixednutz-java-api</id>
+			<name>mixednutz-java-api</name>
+			<url>https://maven.pkg.github.com/mixednutz/mixednutz-java-api</url>
+		</repository>
+	</repositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
