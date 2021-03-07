@@ -48,7 +48,7 @@ public class PageBuilderTest {
 			.setItems(mockResults)
 			.setDescending()
 			.setPageRequest(firstQuery)
-			.setTokenCallback(new TokenCallback())
+			.setTokenCallback(MockElement::getId)
 			.build(); 
 		
 		//Expect 10,9,8,7
@@ -70,7 +70,7 @@ public class PageBuilderTest {
 			.setItems(mockResults)
 			.setDescending()
 			.setPageRequest(firstQuery)
-			.setTokenCallback(new TokenCallback())
+			.setTokenCallback(MockElement::getId)
 			.build(); 
 		
 		//Expect 2, 1
@@ -92,7 +92,7 @@ public class PageBuilderTest {
 			.setItems(mockResults)
 			.setDescending()
 			.setPageRequest(firstQuery)
-			.setTokenCallback(new TokenCallback())
+			.setTokenCallback(MockElement::getId)
 			.build(); 
 		
 		//Expect Empty
@@ -111,7 +111,7 @@ public class PageBuilderTest {
 			.setItems(mockResults)
 			.setAscending()
 			.setPageRequest(firstQuery)
-			.setTokenCallback(new TokenCallback())
+			.setTokenCallback(MockElement::getId)
 			.build(); 
 		
 		//Expect 1,2,3,4
@@ -132,7 +132,7 @@ public class PageBuilderTest {
 			.setItems(mockResults)
 			.setAscending()
 			.setPageRequest(firstQuery)
-			.setTokenCallback(new TokenCallback())
+			.setTokenCallback(MockElement::getId)
 			.build(); 
 		
 		//Expect 9,10
@@ -154,7 +154,7 @@ public class PageBuilderTest {
 			.setItems(mockResults)
 			.setAscending()
 			.setPageRequest(firstQuery)
-			.setTokenCallback(new TokenCallback())
+			.setTokenCallback(MockElement::getId)
 			.build(); 
 		
 		//Expect Empty
@@ -184,7 +184,7 @@ public class PageBuilderTest {
 			.setPageRequest(firstQuery)
 			.setTrimToPageSize(true)
 			.setReSortComparator(comparator)
-			.setTokenCallback(new TokenCallback())
+			.setTokenCallback(MockElement::getId)
 			.build(); 
 		
 		//Expect 10,9,8,7
@@ -202,14 +202,13 @@ public class PageBuilderTest {
 			super();
 			this.id = id;
 		}
-		
-	}
-	
-	static class TokenCallback implements PageBuilder.GetTokenCallback<MockElement, Integer> {
 
-		@Override
-		public Integer getToken(MockElement item) {
-			return item.id;
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
 		}
 		
 	}
