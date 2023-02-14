@@ -18,6 +18,8 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 	 * The type of element
 	 */
 	private Type type;
+	
+	private Visibility visibility;
 
 	/**
 	 * User who posted this element
@@ -86,6 +88,14 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(Visibility visibility) {
+		this.visibility = visibility;
 	}
 
 	public UserSmall getPostedByUser() {
