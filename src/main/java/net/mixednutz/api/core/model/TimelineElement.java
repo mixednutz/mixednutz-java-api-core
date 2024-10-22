@@ -47,6 +47,11 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 	private String paginationId;
 	
 	/**
+	 * Provider-specific reference to this element used for replies
+	 */
+	private String reference;
+
+	/**
 	 * Optional Title
 	 */
 	private String title;
@@ -136,6 +141,14 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 
 	public void setPaginationId(String paginationId) {
 		this.paginationId = paginationId;
+	}
+
+	public String getReference() {
+		return reference;
+	}
+
+	public void setReference(String reference) {
+		this.reference = reference;
 	}
 
 	public String getTitle() {
