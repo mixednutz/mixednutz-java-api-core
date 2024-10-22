@@ -58,7 +58,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
 		
-		<mixednutz-api.version>2.1.3</mixednutz-api.version>
+		<mixednutz-api.version>2.1.4</mixednutz-api.version>
 		<spring-social.version>1.1.6.RELEASE</spring-social.version>
 	</properties>
 
