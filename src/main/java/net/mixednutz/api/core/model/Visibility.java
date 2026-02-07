@@ -2,7 +2,9 @@ package net.mixednutz.api.core.model;
 
 import java.util.Set;
 
+import net.mixednutz.api.model.IExternalRole;
 import net.mixednutz.api.model.IGroupSmall;
+import net.mixednutz.api.model.IRole;
 import net.mixednutz.api.model.IUserSmall;
 import net.mixednutz.api.model.IVisibility;
 
@@ -19,6 +21,7 @@ public class Visibility implements IVisibility {
 	private Type visibilityType;
 	private Set<? extends IUserSmall> selectFollowers;
 	private Set<? extends IGroupSmall> friendGroups;
+	private Set<? extends IExternalRole> externalGroups;
 
 	/**
 	 * Default Constructor
@@ -35,7 +38,8 @@ public class Visibility implements IVisibility {
 	private Visibility(
 			Type visibilityType, 
 			Set<? extends IUserSmall> selectFollowers,
-			Set<? extends IGroupSmall> friendGroups) {
+			Set<? extends IGroupSmall> friendGroups,
+			Set<? extends IRole> externalGroups) {
 		super();
 		this.visibilityType = visibilityType;
 		this.selectFollowers = selectFollowers;
@@ -50,6 +54,11 @@ public class Visibility implements IVisibility {
 			throw new IllegalArgumentException(
 					"FRIEND_GROUPS requires a non-empty set of friendGroups");
 		}
+		if (Type.EXTERNAL_GROUP.equals(visibilityType) && 
+				(externalGroups==null||externalGroups.isEmpty())) {
+			throw new IllegalArgumentException(
+					"EXTERNAL_GROUP requires a non-empty set of externalGroups");
+		}
 	}
 	/**
 	 * Visibility for PRIVATE, ALL_FOLLOWERS, ALL_FRIENDS, ALL_USERS, WORLD.
@@ -59,7 +68,7 @@ public class Visibility implements IVisibility {
 	 * @param visibilityType
 	 */
 	public Visibility(Type visibilityType) {
-		this(visibilityType, null, null);
+		this(visibilityType, null, null, null);
 	}
 	
 	public Type getVisibilityType() {
@@ -86,6 +95,14 @@ public class Visibility implements IVisibility {
 		this.friendGroups = friendGroups;
 	}
 	
+	public Set<? extends IExternalRole> getExternalGroups() {
+		return externalGroups;
+	}
+	
+	public void setExternalGroups(Set<? extends IExternalRole> externalGroups) {
+		this.externalGroups = externalGroups;
+	}
+	
 	public static Visibility asPrivate() {
 		return new Visibility(Type.PRIVATE);
 	}
@@ -107,7 +124,7 @@ public class Visibility implements IVisibility {
 	 * @param selectFollowers
 	 */
 	public static Visibility toSelectFollowers(Set<? extends IUserSmall> selectFollowers) {
-		return new Visibility(Type.SELECT_FOLLOWERS, selectFollowers, null);
+		return new Visibility(Type.SELECT_FOLLOWERS, selectFollowers, null, null);
 	}
 	/**
 	 * VisibilityType.SELECT_FOLLOWERS visibility with set of followers.
@@ -115,7 +132,15 @@ public class Visibility implements IVisibility {
 	 * @param selectFollowers
 	 */
 	public static Visibility toFriendGroups(Set<? extends IGroupSmall> friendGroups) {
-		return new Visibility(Type.FRIEND_GROUPS, null, friendGroups);
+		return new Visibility(Type.FRIEND_GROUPS, null, friendGroups, null);
+	}
+	/**
+	 * VisibilityType.SELECT_FOLLOWERS visibility with set of followers.
+	 * 
+	 * @param selectFollowers
+	 */
+	public static Visibility toExternalGroups(Set<? extends IRole> externalGroups) {
+		return new Visibility(Type.EXTERNAL_GROUP, null, null, externalGroups);
 	}
 	
 }
