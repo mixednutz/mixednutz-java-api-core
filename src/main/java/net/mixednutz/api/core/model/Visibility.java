@@ -4,7 +4,6 @@ import java.util.Set;
 
 import net.mixednutz.api.model.IExternalRole;
 import net.mixednutz.api.model.IGroupSmall;
-import net.mixednutz.api.model.IRole;
 import net.mixednutz.api.model.IUserSmall;
 import net.mixednutz.api.model.IVisibility;
 
@@ -39,11 +38,12 @@ public class Visibility implements IVisibility {
 			Type visibilityType, 
 			Set<? extends IUserSmall> selectFollowers,
 			Set<? extends IGroupSmall> friendGroups,
-			Set<? extends IRole> externalGroups) {
+			Set<? extends IExternalRole> externalGroups) {
 		super();
 		this.visibilityType = visibilityType;
 		this.selectFollowers = selectFollowers;
 		this.friendGroups = friendGroups;
+		this.externalGroups = externalGroups;
 		if (Type.SELECT_FOLLOWERS.equals(visibilityType) && 
 				(selectFollowers==null||selectFollowers.isEmpty())) {
 			throw new IllegalArgumentException(
@@ -139,7 +139,7 @@ public class Visibility implements IVisibility {
 	 * 
 	 * @param selectFollowers
 	 */
-	public static Visibility toExternalGroups(Set<? extends IRole> externalGroups) {
+	public static Visibility toExternalGroups(Set<? extends IExternalRole> externalGroups) {
 		return new Visibility(Type.EXTERNAL_GROUP, null, null, externalGroups);
 	}
 	
