@@ -27,6 +27,11 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 	private UserSmall postedByUser;
 	
 	/**
+	 * Users who contributed to this element
+	 */
+	public List<UserSmall> contributedByUser;
+	
+	/**
 	 * Optional group this element was posted to
 	 */
 	private GroupSmall postedToGroup;
@@ -109,6 +114,14 @@ public class TimelineElement extends ApiResource implements ITimelineElement {
 
 	public void setPostedByUser(UserSmall postedByUser) {
 		this.postedByUser = postedByUser;
+	}
+
+	public List<UserSmall> getContributedByUser() {
+		return contributedByUser;
+	}
+
+	public void setContributedByUser(List<UserSmall> contributedByUser) {
+		this.contributedByUser = contributedByUser;
 	}
 
 	public GroupSmall getPostedToGroup() {
